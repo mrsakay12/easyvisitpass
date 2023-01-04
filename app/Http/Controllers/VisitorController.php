@@ -55,8 +55,7 @@ class VisitorController extends Controller
                 ->addColumn('action', function($row){
                     if($row->visitor_status == 'In' )
                     {
-                        return  '<a href="/visitor/out/'.$row->id.'" class="btn btn-info btn-sm">Check-Out</a>
-                        ';
+                        return  '';
                     }elseif($row->visitor_status == 'Lobby' ){
                         return '<a href="/visitor/in/'.$row->id.'" class="btn btn-success btn-sm">Accept</a>&nbsp;<a href="/visitor/rejected/'.$row->id.'" class="btn btn-danger btn-sm">Reject</a>
                         ';
@@ -73,8 +72,13 @@ class VisitorController extends Controller
                 ->addColumn('arrival', function($row){
                     if($row->visitor_status == 'Pending' )
                     {
-                        return  '<a href="/visitor/arrive/'.$row->id.'" class="btn btn-info btn-sm">Yes</a>
+                        return  '<a href="/visitor/arrive/'.$row->id.'" class="btn btn-info btn-sm">Yes</a>&nbsp;<a href="/visitor/rejected/'.$row->id.'" class="btn btn-danger btn-sm">Reject</a>
                         ';
+                    }elseif($row->visitor_status == 'Lobby' ){
+                        return '<a href="/visitor/reschedule/'.$row->id.'" class="btn btn-success btn-sm">Re-Schedule</a>
+                        ';
+                    }elseif($row->visitor_status == 'In' ){
+                        return '<a href="/visitor/out/'.$row->id.'" class="btn btn-info btn-sm">Check-Out</a>';
                     }
                     else
                     {
@@ -197,6 +201,20 @@ class VisitorController extends Controller
         Visitor::whereId($id)->update($form_data);
 
         return redirect('visitor')->with('success', 'Visitor Checked Out');
+    }
+    function reschedule($id)
+    {
+        $data = Visitor::findOrFail($id);
+      
+        $form_data = array(
+           
+            'visitor_status'          =>   'Pending',
+        
+           
+        );
+        Visitor::whereId($id)->update($form_data);
+
+        return redirect('visitor')->with('success', 'Visitor Re-schedule');
     }
 
 }
