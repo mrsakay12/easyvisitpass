@@ -22,7 +22,7 @@
 	@endif
 					<div class="card">
 					<img src="{{ asset('/Images/logo2.png') }}"  >
-						<h3 class="card-header text-center">Login</h3>
+						<h3 class="card-header text-center">Log in</h3>
 
 						<div class="card-body">
 							<form method="post" action="{{ route('login.custom') }}">
@@ -46,7 +46,7 @@
 								</div>
 
 								<div class="d-grid mx-auto">
-									<button type="submit" class="btn btn-primary btn-block">Login</button>
+									<button type="submit" class="btn btn-primary btn-block">Log in</button>
 								</div>
 
 							</form>
