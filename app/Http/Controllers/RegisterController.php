@@ -1,17 +1,14 @@
 <?php
 
 namespace App\Http\Controllers;
-
-use App\Models\Preregister;
-use App\Http\Requests\StorePre_registerRequest;
-use App\Http\Requests\UpdatePre_registerRequest;
 use Illuminate\Http\Request;
 use App\Models\Visitor;
+use App\Models\Register;
 use DataTables;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
-
-class PreRegisterController extends Controller{
+class RegisterController extends Controller
+{
     public function __construct()
     {
         $this->middleware('auth');
@@ -19,37 +16,25 @@ class PreRegisterController extends Controller{
 
     function index()
     {
-        return view('pre_register');
+        return view('register');
     }
-
     function fetch_all(Request $request)
     {
         if($request->ajax())
         {
-            $query = Preregister::join('users', 'users.id', '=', 'register_meet_person_name');
-
-            if(Auth::user()->type == 'User')
-            {
-                $query->where('register_meet_person_name', '=', Auth::user()->id);
-            }
-
-            $data = $query->get(['pre_registers.register_firstname', 'pre_registers.register_lastname', 'pre_registers.register_email', 'pre_registers.register_mobile_no', 'pre_registers.register_gender', 'pre_registers.register_address',  'users.name', 'pre_registers.id']);
-
+            $data = Register::latest()->get();
             return DataTables::of($data)
                 ->addIndexColumn()
-                
                 ->addColumn('action', function($row){
-                    return '<a href="/pre_register/edit/'.$row->id.'" class="btn btn-primary btn-sm">Edit</a>&nbsp;<button type="button" class="btn btn-danger btn-sm delete" data-id="'.$row->id.'">Delete</button>';
+                    return '<a href="/department/edit/'.$row->id.'" class="btn btn-primary btn-sm">Edit</a>&nbsp;<button type="button" class="btn btn-danger btn-sm delete" data-id="'.$row->id.'">Delete</button>';
                 })
-               
                 ->rawColumns(['action'])
                 ->make(true);
-                
         }
     }
     function add()
     {
-        return view('add_pre_register');
+        return view('add_register');
     }
 
     function add_validation(Request $request)
@@ -65,7 +50,7 @@ class PreRegisterController extends Controller{
         $data = $request->all();
 
 
-        Preregister::create([
+        Register::create([
             'visitor_code'           =>  $data['visitor_code'],
             'visitor_firstname'      =>  $data['visitor_firstname'],
             'visitor_lastname'       =>  $data['visitor_lastname'],
@@ -81,19 +66,25 @@ class PreRegisterController extends Controller{
           
         ]);
 
-        return redirect('visitor')->with('success', 'New Visitors Added');
+        return redirect('register')->with('success', 'New Visitors Added');
     }
 
     function delete($id)
     {
-        $data = Preregister::findOrFail($id);
+        $data = Register::findOrFail($id);
 
         $data->delete();
 
-        return redirect('pre_register')->with('success', 'Pre- Register Removed');
+        return redirect('register')->with('success', 'Visitor Removed');
     }
 
    
     
+
+
+   
+   
+
 }
+
 

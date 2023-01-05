@@ -73,7 +73,7 @@
                             <a class="nav-link {{ Request::segment(1) == 'visitor' ? 'active' : '' }}" href="/visitor">Visitors</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link {{ Request::segment(1) == 'Pre-Registers' ? 'active' : '' }}" href="/pre_register">Pre-Registers</a>
+                            <a class="nav-link {{ Request::segment(1) == 'register' ? 'active' : '' }}" href="/register">Pre-Registers</a>
                         </li>
 
                             <li class="nav-item">

@@ -1,15 +1,12 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use Illuminate\Http\Request;
-
 use App\Models\Visitor;
-
 use DataTables;
-
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
+use App\Models\User;
 class VisitorController extends Controller
 {
     public function __construct()
@@ -92,7 +89,10 @@ class VisitorController extends Controller
     }
     function add()
     {
-        return view('add_visitor');
+        $user['data'] = User::orderby("name","asc")
+        ->select('id','name')
+        ->get();
+        return view('add_visitor')->with("user",$user);
     }
 
     function add_validation(Request $request)

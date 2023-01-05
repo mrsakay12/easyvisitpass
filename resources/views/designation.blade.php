@@ -33,6 +33,7 @@
 					<thead>
 						<tr>
 							<th>Designation Name</th>
+							<th>Department</th>
 							<th>Status</th>
 							<th>Action</th>
 						</tr>
@@ -54,6 +55,10 @@
 			{
 				data:'designation_name',
 				name:'designation_name'
+			},
+			{
+				data:'department_name',
+				name:'department_name'
 			},
 			{
 				data:'status',

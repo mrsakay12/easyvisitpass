@@ -2,19 +2,20 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Designation;
 use App\Http\Requests\StoreDesignationRequest;
 use App\Http\Requests\UpdateDesignationRequest;
 namespace App\Http\Controllers;
 
+use App\Models\Department;
 use App\Models\Designation;
 use Illuminate\Http\Request;
-
+use DB;
 
 
 use DataTables;
 
 use Illuminate\Support\Facades\Auth;
+
 
 
 class DesignationController extends Controller
@@ -26,6 +27,7 @@ class DesignationController extends Controller
 
     public function index()
     {
+       
         return view('designation');
     }
 
@@ -33,7 +35,11 @@ class DesignationController extends Controller
     {
         if($request->ajax())
         {
-            $data = Designation::latest()->get();
+            
+            $query = Designation::join('departments', 'departments.id', '=', 'department_id');
+
+            $data = $query->get(['designations.designation_name', 'designations.status', 'designations.id','departments.department_name','designations.id']);
+
             return DataTables::of($data)
                 ->addIndexColumn()
                 ->addColumn('action', function($row){
@@ -46,21 +52,27 @@ class DesignationController extends Controller
 
     function add()
     {
-        return view('add_designation');
+        $departments['data'] = Department::orderby("department_name","asc")
+        ->select('id','department_name')
+        ->get();
+        return view('add_designation')->with("departments",$departments);
     }
 
     function add_validation(Request $request)
     {
+        
         $request->validate([
             'designation_name'       =>  'required',
+            'department_id'       =>  'required',
             'status'                 =>  'required'
         ]);
 
         $data = $request->all();
-
+        $datas = DB::table('departments')->get();
         Designation::create([
             'designation_name'       =>  $data['designation_name'],
-            'status'        =>   $data['status']
+            'department_id'       =>  $data['department_id'],
+            'status'        =>   $data['status'],
         ]);
 
         return redirect('designation')->with('success', 'New Designation Added');
@@ -69,14 +81,19 @@ class DesignationController extends Controller
     public function edit($id)
     {
         $data = Designation::findOrFail($id);
-
-        return view('edit_designation', compact('data'));
+        $departments['data'] = Department::orderby("department_name","asc")
+        ->select('id','department_name')
+        ->get();
+        
+        
+        return view('edit_designation', compact('data'))->with("departments",$departments);
     }
 
     function edit_validation(Request $request)
     {
         $request->validate([
             'designation_name'       =>  'required',
+            'department_id'       =>  'required',
             'status'                 =>  'required'
         ]);
 
@@ -84,6 +101,8 @@ class DesignationController extends Controller
 
         $form_data = array(
             'designation_name'       =>  $data['designation_name'],
+            'department_id'       =>  $data['department_id'],
+            
             'status'                 =>   $data['status']
         );
 

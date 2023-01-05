@@ -24,6 +24,18 @@
 		        			<span class="text-danger">{{ $errors->first('department_name') }}</span>
 		        		@endif
 		        	</div>
+
+					<div class="form-group mb-3">
+		        		<label><b>Department</b></label>
+					
+								<select id='department_id' name='department_id' class="form-control" >
+                 <option value='0'>-- Select department --</option>
+                      @foreach($departments['data'] as $department)
+                 <option value='{{ $department->id }}'>{{ $department->department_name }}</option>
+                      @endforeach
+					</select>
+
+		        	</div>
 					
 					<div class="form-group mb-3">
 		        		<label><b>Status</b></label>
