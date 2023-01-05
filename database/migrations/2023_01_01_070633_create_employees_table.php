@@ -21,7 +21,6 @@ class CreateEmployeesTable extends Migration
             $table->string('nickname')->nullable();
             $table->string('display_name')->nullable();
             $table->string('gender')->nullable();
-            $table->unsignedTinyInteger('status');
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('department_id');
             $table->unsignedBigInteger('designation_id');

@@ -89,7 +89,7 @@ class VisitorController extends Controller
     }
     function add()
     {
-        $user['data'] = User::orderby("name","asc")
+        $user['data'] = User::orderby("name","asc")->where('type', '=', 'User')->where('status', '=', 'Active')
         ->select('id','name')
         ->get();
         return view('add_visitor')->with("user",$user);

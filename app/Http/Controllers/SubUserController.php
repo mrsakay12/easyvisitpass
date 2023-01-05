@@ -61,6 +61,7 @@ class SubUserController extends Controller
             'email'     =>  $data['email'],
             'password'  =>  Hash::make($data['password']),
             'type'      =>  $data['type'],
+            'status'      =>  $data['status'],
         ]);
 
         return redirect('sub_user')->with('success', 'New User Added');
@@ -87,6 +88,8 @@ class SubUserController extends Controller
             $form_data = array(
                 'name'  => $data['name'],
                 'email'  => $data['email'],
+                'status'  => $data['status'],
+                'type'  => $data['type'],
                 'password' => Hash::make($data['password'])
             );
         }
@@ -94,7 +97,9 @@ class SubUserController extends Controller
         {
             $form_data = array(
                 'name'      =>  $data['name'],
-                'email'     =>  $data['email']
+                'email'     =>  $data['email'],
+                'status'  => $data['status'],
+                'type'  => $data['type'],
             );
         }
 

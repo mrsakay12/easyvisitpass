@@ -35,12 +35,13 @@
 					<div class="form-group mb-3">
 		        		<label><b>Role</b></label>
 						<select class="form-control"  name="type" aria-label="Default select example">
-								<option value="User">Employee</option>
+								<option value="User">User</option>
 								<option value="Receptionist">Receptionist</option>
 								<option value="Admin">Admin</option>
 								</select>
 					
 		        	</div>
+					<input type="hidden" name="status" class="form-control" placeholder="Email" value="Active" >
 
 		        	<div class="form-group mb-3">
 		        		<label><b>Password</b></label>

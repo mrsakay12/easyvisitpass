@@ -7,7 +7,8 @@ use App\Models\User;
 use Hash;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Employee;
-
+use App\Models\Department;
+use App\Models\Designation;
 class ProfileController extends Controller
 {
     public function __construct()
@@ -18,10 +19,15 @@ class ProfileController extends Controller
     function index()
     {
         $data = User::findOrFail(Auth::user()->id);
-        return view('profile', compact('data'));
-
-        
+        $departments['data'] = Department::orderby("department_name","asc")
+        ->select('id','department_name')
+        ->get();
+        return view('profile', compact('data'))->with("departments",$departments);
+      
     }
+
+    
+
 
     function edit_validation(Request $request)
     {
@@ -53,5 +59,18 @@ class ProfileController extends Controller
         return redirect('profile')->with('success', 'Profile Data Updated');
         
     }
+    public function getDept($departmentid=0){
 
-}
+        // Fetch Designation by Departmentid
+        $empData['data'] = Designation::orderby("designation_name","asc")->where('status', '=', 'Active')
+           ->select('id','designation_name')
+           ->where('department_id',$departmentid)
+           ->get();
+   
+        return response()->json($empData);
+   
+      }
+   }
+
+
+

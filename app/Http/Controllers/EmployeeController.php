@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\Auth;
 
 use App\Models\User;
 use App\Traits\Userid;
+use App\Models\Department;
+use App\Models\Designation;
 use Hash;
 
 
@@ -23,9 +25,16 @@ class EmployeeController extends Controller
 
     function index()
     {
-        $data = Employee::findOrFail(Auth::user()->id);
-        return view('profile', compact('data'));
+       
+        $departments['data'] = Department::orderby("department_name","asc")
+        ->select('id','department_name')
+        ->get();
+        return view('profile', compact('data'))->with("departments",$departments);
+     
     }
+
+
+
 
     function edit_validation(Request $request)
     {

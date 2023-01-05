@@ -32,6 +32,25 @@
 		        			<span class="text-danger">{{ $errors->first('email') }}</span>
 		        		@endif
 		        	</div>
+					<div class="form-group mb-3">
+		        	<label><b>Role</b></label>
+		        		
+						<select class="form-control"  name="type" aria-label="Default select example" >
+						           <option value="User">User</option>
+								<option value="Receptionist">Receptionist</option>
+								<option value="Admin">Admin</option>
+						</select>
+				
+					</div>
+					<div class="form-group mb-3">
+					<label><b>Status</b></label>
+		        	
+						<select class="form-control"  name="status" aria-label="Default select example" >
+								<option value="Active">Active</option>
+								<option value="De-Active">De-Active</option>
+						</select>
+					</div>
+
 		        	<div class="form-group mb-3">
 		        		<label><b>Password</b></label>
 		        		<input type="password" name="password" class="form-control" placeholder="Password">

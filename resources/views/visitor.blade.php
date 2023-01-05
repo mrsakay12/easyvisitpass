@@ -43,7 +43,9 @@
 							<th>Check-in </th>
 							<th>Check-out</th>
 							<th>Status</th>
+							@if(Auth::user()->type != 'Receptionist')
 							<th>User Action</th>
+							@endif
 							@if(Auth::user()->type != 'User')
 							<th>Reception Action</th>
 							@endif
@@ -101,11 +103,14 @@ $(document).ready(function(){
 				data:'visitor_status',
 				name:'visitor_status'
 			},
+			@if(Auth::user()->type != 'Receptionist')
 			{
 				data:'action',
 				name:'action',
 				orderable:false
-			},
+			}
+			,
+			@endif
 			@if(Auth::user()->type != 'User')
 			{
 				data:'arrival',

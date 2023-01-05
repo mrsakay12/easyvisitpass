@@ -43,8 +43,9 @@ Route::get('logout', [CustomAuthController::class, 'logout'])->name('logout');
 
 Route::get('profile', [ProfileController::class, 'index'])->name('profile');
 
-Route::post('profile/edit_validation', [ProfileController::class, 'edit_validation'])->name('profile.edit_validation');
 
+Route::post('profile/edit_validation', [ProfileController::class, 'edit_validation'])->name('profile.edit_validation');
+Route::get('/getDept/{id}', [ProfileController::class, 'getDept']);
 
 Route::post('employee/edit_validation', [EmployeeController::class, 'edit_validation'])->name('employee.edit_validation');
 Route::post('employee/add_validation', [EmployeeController::class, 'add_validation'])->name('employee.add_validation');
