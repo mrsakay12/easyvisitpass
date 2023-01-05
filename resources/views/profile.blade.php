@@ -72,7 +72,7 @@
 		        		<label><b>Gender</b></label>
 		        		
 						<select class="form-control"  name="gender" aria-label="Default select example" value="{{ $data->gender}}" >
-								<option >---> choose</option>
+								<option >-- Select Gender --</option>
 								<option value="Male">Male</option>
 								<option value="Female">Female</option>
 						</select>

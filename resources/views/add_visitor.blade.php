@@ -84,7 +84,14 @@
 		        	</div>
 					<div class="form-group mb-3">
 		        		<label><b>Select Employee </b></label>
-						<input type="text" name="visitor_meet_person_name" class="form-control" placeholder="visitor_meet_person_name" />
+						
+						<select id='visitor_meet_person_name' name='visitor_meet_person_name' class="form-control" >
+                 <option >-- Select employee --</option>
+                      @foreach($user['data'] as $user)
+                 <option value='{{ $user->id }}'>{{ $user->name }}</option>
+                      @endforeach
+					</select>
+
 		        		@if($errors->has('visitor_meet_person_name'))
 		        			<span class="text-danger">{{ $errors->first('visitor_meet_person_name') }}</span>
 		        		@endif

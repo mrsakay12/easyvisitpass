@@ -2,11 +2,11 @@
 
 @section('content')
 
-<h2 class="mt-3">Pre-Register Management</h2>
+<h2 class="mt-3">Pre - Register Management</h2>
 <nav aria-label="breadcrumb">
   	<ol class="breadcrumb">
     	<li class="breadcrumb-item"><a href="/dashboard">Dashboard</a></li>
-    	<li class="breadcrumb-item active">Visitor Management</li>	
+    	<li class="breadcrumb-item active">Pre - Register Management</li>	
   	</ol>
 </nav>
 <div class="mt-4 mb-4">
@@ -22,7 +22,7 @@
 				@if(Auth::user()->type == 'Admin')
 
 				<div class="col col-md-4">
-					<a href="{{ route('pre_register.add') }}" class="btn btn-success btn-sm float-end">Add</a>
+					<a href="{{ route('register.add') }}" class="btn btn-success btn-sm float-end">Add</a>
 				</div>
 				
 				@endif
@@ -31,17 +31,16 @@
 		</div>
 		<div class="card-body">
 			<div class="table-responsive">
-				<table class="table table-bordered" id="pre_register_table">
+				<table class="table table-bordered" id="register_table">
 					<thead>
 						<tr>
-				
 							<th>First Name</th>
 							<th>Last Name</th>
 							<th>Email</th>
 							<th>Phone</th>
 							<th>Gender</th>
-							<th>Address</th>
-							<th>Visited To </th>
+							<th>Address </th>
+							<th>Visited To</th>
 							<th>Action</th>
 							
 						</tr>
@@ -55,11 +54,11 @@
 <script>
 $(document).ready(function(){
 
-	var table = $('#pre_register_table').DataTable({
+	var table = $('#register_table').DataTable({
 
 		processing:true,
 		serverSide:true,
-		ajax:"{{ route('pre_register.fetchall') }}",
+		ajax:"{{ route('register.fetchall') }}",
 		columns:[
 			{
 				data:'register_firstname',
@@ -90,12 +89,11 @@ $(document).ready(function(){
 				data:'register_meet_person_name',
 				name:'register_meet_person_name'
 			},
-			,
 			{
 				data:'action',
 				name:'action',
 				orderable:false
-			},
+			}
 			
 		]
 	});
@@ -106,7 +104,7 @@ var id = $(this).data('id');
 
 if(confirm("Are you sure you want to remove it?"))
 {
-	window.location.href = "/pre_register/delete/" + id;
+	window.location.href = "/register/delete/" + id;
 }
 
 });

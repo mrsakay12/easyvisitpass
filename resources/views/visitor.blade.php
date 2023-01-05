@@ -43,7 +43,7 @@
 							<th>Check-in </th>
 							<th>Check-out</th>
 							<th>Status</th>
-							<th>Action</th>
+							<th>User Action</th>
 							@if(Auth::user()->type != 'User')
 							<th>Reception Action</th>
 							@endif
@@ -73,7 +73,7 @@ $(document).ready(function(){
 				name: 'visitor_firstname'
 			},
 			{
-				data:'visitor_lastname',
+				data:'visitor_lastname' ,
 				name: 'visitor_lastname'
 			},
 		

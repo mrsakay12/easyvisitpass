@@ -6,7 +6,7 @@
 <nav aria-label="breadcrumb">
   	<ol class="breadcrumb">
     	<li class="breadcrumb-item"><a href="/dashboard">Dashboard</a></li>
-    	<li class="breadcrumb-item"><a href="/image.png">Designation Management</a></li>
+    	<li class="breadcrumb-item"><a href="/designation">Designation Management</a></li>
     	<li class="breadcrumb-item active">Add New Designation</li>
   	</ol>
 </nav>
@@ -24,11 +24,27 @@
 		        			<span class="text-danger">{{ $errors->first('designation_name') }}</span>
 		        		@endif
 		        	</div>
+					
+					<div class="form-group mb-3">
+		        		<label><b>Department</b></label>
+						
+				<select id='department_id' name='department_id' class="form-control" >
+                 <option >-- Select department --</option>
+                      @foreach($departments['data'] as $department)
+                 <option value='{{ $department->id }}'>{{ $department->department_name }}</option>
+                      @endforeach
+					</select>
+					@if($errors->has('department_id'))
+		        		<span class="text-danger">{{ $errors->has('department_id') }}</span>
+		        		@endif
+
+		        	</div>
+
 		        	<div class="form-group mb-3">
-		        		<label><b>Status</b></label>
+		        	
 		        		<div class="row">
 		        			<div class="col col-md-10">
-						<select class="form-control"  name="status" aria-label="Default select example">
+						<select class="form-control"  name="status" aria-label="Default select example" hidden>
 								<option value="Active">Active</option>
 								<option value="De-Active">De-Active</option>
 						</select></div>
