@@ -2,7 +2,7 @@
 
 @section('content')
 
-<h2 class="mt-3">Visitor Management</h2>
+<h2 class="mt-3">Pre-Register Management</h2>
 <nav aria-label="breadcrumb">
   	<ol class="breadcrumb">
     	<li class="breadcrumb-item"><a href="/dashboard">Dashboard</a></li>
@@ -22,7 +22,7 @@
 				@if(Auth::user()->type == 'Admin')
 
 				<div class="col col-md-4">
-					<a href="{{ route('visitor.add') }}" class="btn btn-success btn-sm float-end">Add</a>
+					<a href="{{ route('pre_register.add') }}" class="btn btn-success btn-sm float-end">Add</a>
 				</div>
 				
 				@endif
@@ -31,22 +31,19 @@
 		</div>
 		<div class="card-body">
 			<div class="table-responsive">
-				<table class="table table-bordered" id="visitor_table">
+				<table class="table table-bordered" id="pre_register_table">
 					<thead>
 						<tr>
-						    <th>Visitor ID</th>
+				
 							<th>First Name</th>
 							<th>Last Name</th>
-							<th>Presented ID No.</th>
-							<th>Visited To</th>
-							<th>Purpose</th>
-							<th>Check-in </th>
-							<th>Check-out</th>
-							<th>Status</th>
+							<th>Email</th>
+							<th>Phone</th>
+							<th>Gender</th>
+							<th>Address</th>
+							<th>Visited To </th>
 							<th>Action</th>
-							@if(Auth::user()->type != 'User')
-							<th>Reception Action</th>
-							@endif
+							
 						</tr>
 					</thead>
 					<tbody></tbody>
@@ -58,61 +55,48 @@
 <script>
 $(document).ready(function(){
 
-	var table = $('#visitor_table').DataTable({
+	var table = $('#pre_register_table').DataTable({
 
 		processing:true,
 		serverSide:true,
-		ajax:"{{ route('visitor.fetchall') }}",
+		ajax:"{{ route('pre_register.fetchall') }}",
 		columns:[
 			{
-				data:'visitor_code',
-				name: 'visitor_code'
+				data:'register_firstname',
+				name: 'register_firstname'
 			},
 			{
-				data:'visitor_firstname',
-				name: 'visitor_firstname'
+				data:'register_lastname',
+				name: 'register_lastname'
 			},
 			{
-				data:'visitor_lastname',
-				name: 'visitor_lastname'
+				data:'register_email',
+				name: 'register_email'
 			},
 		
 			{
-				data:'visitor_id',
-				name: 'visitor_id'
+				data:'register_mobile_no',
+				name: 'register_mobile_no'
 			},
 			{
-				data: 'name',
-				name: 'name'
+				data: 'register_gender',
+				name: 'register_gender'
 			},
 			{
-				data:'visitor_purpose',
-				name:'visitor_purpose'
+				data:'register_address',
+				name:'register_address'
 			},
 			{
-				data:'visitor_enter_time',
-				name: 'visitor_enter_time'
+				data:'register_meet_person_name',
+				name:'register_meet_person_name'
 			},
-			{
-				data:'visitor_out_time',
-				name:'visitor_out_time'
-			},
-			{
-				data:'visitor_status',
-				name:'visitor_status'
-			},
+			,
 			{
 				data:'action',
 				name:'action',
 				orderable:false
 			},
-			@if(Auth::user()->type != 'User')
-			{
-				data:'arrival',
-				name:'arrival',
-				orderable:false
-			}
-			@endif
+			
 		]
 	});
 
@@ -122,7 +106,7 @@ var id = $(this).data('id');
 
 if(confirm("Are you sure you want to remove it?"))
 {
-	window.location.href = "/visitor/delete/" + id;
+	window.location.href = "/pre_register/delete/" + id;
 }
 
 });

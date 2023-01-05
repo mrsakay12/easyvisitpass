@@ -46,7 +46,7 @@
 								</div>
 
 								<div class="d-grid mx-auto">
-									<button type="submit" class="btn btn-primary btn-block">Login</button>
+									<button type="submit" class="btn btn-primary btn-block">Log in</button>
 								</div>
 
 							</form>

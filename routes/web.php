@@ -8,6 +8,7 @@ use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\VisitorController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\DesignationController;
+use App\Http\Controllers\PreRegisterController;
 
 /*
 |--------------------------------------------------------------------------
@@ -97,11 +98,12 @@ Route::get('visitor/delete/{id}', [VisitorController::class, 'delete'])->name('d
 
 
 
-//In
+//In out 
 Route::get('visitor/in/{id}', [VisitorController::class, 'in'])->name('in');
 Route::get('visitor/out/{id}', [VisitorController::class, 'out'])->name('out');
 Route::get('visitor/rejected/{id}', [VisitorController::class, 'rejected'])->name('rejected');
 Route::get('visitor/arrive/{id}', [VisitorController::class, 'arrive'])->name('arrive');
+Route::get('visitor/reschedule/{id}', [VisitorController::class, 'reschedule'])->name('reschedule');
 
 
 
@@ -122,4 +124,14 @@ Route::get('designation/edit/{id}', [DesignationController::class, 'edit'])->nam
 Route::post('designation/edit_validation', [DesignationController::class, 'edit_validation'])->name('designation.edit_validation');
 
 Route::get('designation/delete/{id}', [DesignationController::class, 'delete'])->name('delete');
+
+//Designations
+
+Route::get('pre_register', [PreRegisterController::class, 'index'])->name('pre_register');
+Route::get('pre_register/fetch_all', [PreRegisterController::class, 'fetch_all'])->name('pre_register.fetch_all');
+Route::get('pre_register/add', [PreRegisterController::class, 'add'])->name('add');
+Route::post('pre_register/add_validation', [PreRegisterController::class, 'add_validation'])->name('pre_register.add_validation');
+Route::get('pre_register/edit/{id}', [PreRegisterController::class, 'edit'])->name('edit');
+Route::post('pre_register/edit_validation', [PreRegisterController::class, 'edit_validation'])->name('pre_register.edit_validation');
+Route::get('pre_register/delete/{id}', [PreRegisterController::class, 'delete'])->name('delete');
 
