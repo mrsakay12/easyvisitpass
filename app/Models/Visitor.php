@@ -23,6 +23,7 @@ class Visitor extends Model
                 'visitor_reason_to_meet', 
                 'visitor_enter_by',
                 'visitor_status',
+                'visit_time',
                 
     ];
 }

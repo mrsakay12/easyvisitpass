@@ -7,6 +7,7 @@ use DataTables;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 use App\Models\User;
+use DB;
 class VisitorController extends Controller
 {
     public function __construct()
@@ -24,14 +25,17 @@ class VisitorController extends Controller
        
         if($request->ajax())
         {
+            
             $query = Visitor::join('users', 'users.id', '=', 'visitor_meet_person_name');
+
+
 
             if(Auth::user()->type == 'User')
             {
                 $query->where('visitor_meet_person_name', '=', Auth::user()->id);
             }
 
-            $data = $query->get(['visitors.visitor_firstname', 'visitors.visitor_lastname', 'visitors.visitor_code', 'visitors.visitor_id', 'visitors.visitor_meet_person_name', 'visitors.visitor_purpose', 'visitors.visitor_enter_time', 'visitors.visitor_out_time', 'visitors.visitor_status', 'users.name', 'visitors.id']);
+            $data = $query ->get(['visitors.visitor_firstname', 'visitors.visitor_lastname', 'visitors.visitor_code', 'visitors.visitor_id', 'visitors.visitor_meet_person_name', 'visitors.visitor_purpose', 'visitors.visitor_enter_time', 'visitors.visitor_out_time', 'visitors.visitor_status', 'users.name', 'visitors.id']);
 
             return DataTables::of($data)
                 ->addIndexColumn()
@@ -96,12 +100,7 @@ class VisitorController extends Controller
         return view('add_visitor')->with("user",$user);
     }
 
-    function checkin()
-    {
-
-        return view('frontend/checkin');
-    }
-
+   
     function add_validation(Request $request)
     {
         $request->validate([

@@ -29,8 +29,16 @@ Route::get('/', function () {
 
 //Front End Route
 Route::get('home', [CustomAuthController::class, 'home'])->name('home');
-Route::get('checkin', [VisitorController::class, 'checkin'])->name('visitor.checkin');
+Route::get('checkin', [CustomAuthController::class, 'checkin'])->name('checkin');
+Route::get('checkin-id', [CustomAuthController::class, 'checkid'])->name('checkid');
+Route::get('preregister', [CustomAuthController::class, 'preregister'])->name('preregister');
+Route::get('return', [CustomAuthController::class, 'return'])->name('return');
+Route::post('checkin/checkin_validation', [CustomAuthController::class, 'checkin_validation'])->name('checkin_validation');
+
 Route::post('visitor/add_validation', [VisitorController::class, 'add_validation'])->name('visitor.add_validation');
+
+
+
 
 Route::get('registration', [CustomAuthController::class, 'registration'])->name('register');
 
@@ -42,7 +50,7 @@ Route::post('custom-login', [CustomAuthController::class, 'custom_login'])->name
 
 Route::get('dashboard', [CustomAuthController::class, 'dashboard'])->name('dashboard');
 
-Route::redirect('/', '/dashboard')->name('dashboard');
+Route::redirect('/', '/home')->name('home');
 
 
 
