@@ -19,10 +19,14 @@ class ProfileController extends Controller
     function index()
     {
         $data = User::findOrFail(Auth::user()->id);
+        $data2 = Employee::where('user_id', '=' ,Auth::user()->id)->firstOrFail();
+        
+        
+      
         $departments['data'] = Department::orderby("department_name","asc")
         ->select('id','department_name')
         ->get();
-        return view('profile', compact('data'))->with("departments",$departments);
+        return view('profile', compact('data','data2'))->with("departments",$departments);
       
     }
 
@@ -37,6 +41,7 @@ class ProfileController extends Controller
         ]);
 
         $data = $request->all();
+ 
 
         if(!empty($data['password']))
         {
@@ -59,17 +64,7 @@ class ProfileController extends Controller
         return redirect('profile')->with('success', 'Profile Data Updated');
         
     }
-    public function getDept($departmentid=0){
-
-        // Fetch Designation by Departmentid
-        $empData['data'] = Designation::orderby("designation_name","asc")->where('status', '=', 'Active')
-           ->select('id','designation_name')
-           ->where('department_id',$departmentid)
-           ->get();
    
-        return response()->json($empData);
-   
-      }
    }
 
 

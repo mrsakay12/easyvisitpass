@@ -37,6 +37,7 @@
 							<th>Status</th>
 							@if(Auth::user()->type == 'Admin')
 							<th>Action</th>
+					
 							@endif
 						</tr>
 					</thead>

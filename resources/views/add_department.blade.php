@@ -25,7 +25,7 @@
 		        		@endif
 		        	</div>
 		        	<div class="form-group mb-3">
-		        		<label><b>Contact Person/Number</b></label>
+		        		<label><b>Department Location</b></label>
 		        		<div class="row">
 		        			<div class="col col-md-10">
 		        				<input type="text" name="contact_person[]" class="form-control" />

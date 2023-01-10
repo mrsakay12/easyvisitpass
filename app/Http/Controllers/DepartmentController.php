@@ -54,7 +54,7 @@ class DepartmentController extends Controller
 
         Department::create([
             'department_name'       =>  $data['department_name'],
-            'contact_person'        =>  implode(", ", $data['contact_person'])
+            'contact_person'        =>  implode("/ ", $data['contact_person'])
         ]);
 
         return redirect('department')->with('success', 'New Department Added');
@@ -78,7 +78,7 @@ class DepartmentController extends Controller
 
         $form_data = array(
             'department_name'       =>  $data['department_name'],
-            'contact_person'        =>  implode(", ", $data['contact_person'])
+            'contact_person'        =>  implode("/ ", $data['contact_person'])
         );
 
         Department::whereId($data['hidden_id'])->update($form_data);

@@ -41,7 +41,9 @@
 								</select>
 					
 		        	</div>
-					<input type="hidden" name="status" class="form-control" placeholder="Email" value="Active" >
+					<input type="hidden" name="status" class="form-control" placeholder="status" value="Active" >
+					
+					<input type="hidden" name="profile" class="form-control" placeholder="profile" value="New">
 
 		        	<div class="form-group mb-3">
 		        		<label><b>Password</b></label>

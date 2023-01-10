@@ -58,6 +58,8 @@
 	</div>
 </div>
 <script>
+
+	
 $(document).ready(function(){
 
 	var table = $('#visitor_table').DataTable({
@@ -92,8 +94,9 @@ $(document).ready(function(){
 				name:'visitor_purpose'
 			},
 			{
-				data:'visitor_enter_time',
-				name: 'visitor_enter_time'
+				data:'visitor_enter_time', 
+				name: 'visitor_enter_time',
+				
 			},
 			{
 				data:'visitor_out_time',

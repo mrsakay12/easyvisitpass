@@ -51,27 +51,29 @@
 		<div class="card">
 			<div class="card-header">Edit Profile</div>
 			<div class="card-body">
-				<form method="post" action="{{ route('employee.add_validation') }}">
+				<form method="post" action="{{ route('employee.edit_validation') }}">
 					@csrf
 					<div class="col-md-8" >
 					<div class="form-group mb-3 ">
 		        		<label><b>First Name</b></label>
-		        		<input type="text" name="first_name" class="form-control" placeholder="First Name" value="{{ $data->first_name }}" />
+						
+		        		<input type="text" name="first_name" class="form-control" placeholder="First Name" value="{{ $data2->first_name }}" />
+				
 		        	</div>
 					<div class="form-group mb-3">
 		        		<label><b>Last Name</b></label>
-		        		<input type="text" name="last_name" class="form-control" placeholder="Last Name" value="{{ $data->last_name }}" />
+		        		<input type="text" name="last_name" class="form-control" placeholder="Last Name" value="{{ $data2->last_name }}" />
 		        	</div>
 
 					<div class="form-group mb-3">
 		        		<label><b>Nickname</b></label>
-		        		<input type="text" name="nickname" class="form-control" placeholder="nickname" value="{{ $data->nickname }}" />
+		        		<input type="text" name="nickname" class="form-control" placeholder="nickname" value="{{ $data2->nickname }}" />
 		        	</div>
 
 					<div class="form-group mb-3">
 		        		<label><b>Gender</b></label>
 		        		
-						<select class="form-control"  name="gender" aria-label="Default select example" value="{{ $data->gender}}" >
+						<select class="form-control"  name="gender" aria-label="Default select example" value="{{ $data2->gender}}" placeholder="{{ $data2->gender}}d" >
 								<option >-- Select Gender --</option>
 								<option value="Male">Male</option>
 								<option value="Female">Female</option>
@@ -79,12 +81,16 @@
 		        	</div>
 					<div class="form-group mb-3">
 		        		<label><b>Phone</b></label>
-		        		<input type="text" name="phone" class="form-control" placeholder="Contact Number" value="{{ $data->phone }}" />
+		        		<input type="text" name="phone" class="form-control" placeholder="Contact Number" value="{{ $data2->phone }}" />
+		        	</div>
+					<div class="form-group mb-3">
+		        		<label><b>Home address </b></label>
+		        		<input type="text" name="address" class="form-control" placeholder="address" value="{{ $data2->address }}" />
 		        	</div>
 
 					<div class="form-group mb-3">
 		        		<label><b>About</b></label>
-		        		<input type="text" name="about" class="form-control" placeholder="About Me" value="{{ $data->about }}" />
+		        		<input type="text" name="about" class="form-control" placeholder="About Me" value="{{ $data2->about }}" />
 		        	</div>
 				
 					
@@ -106,7 +112,7 @@
 							</div>
 		        
 		        	<div class="form-group mb-3">
-			
+					<input type="hidden" name="hidden_id" value="{{ $data2->id }}" />
 		        		<input type="submit" class="btn btn-primary" value="Submit" />
 		        	</div>
 				</form>

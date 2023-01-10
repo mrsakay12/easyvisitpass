@@ -21,6 +21,7 @@ class VisitorController extends Controller
 
     function fetch_all(Request $request)
     {
+       
         if($request->ajax())
         {
             $query = Visitor::join('users', 'users.id', '=', 'visitor_meet_person_name');
@@ -95,6 +96,12 @@ class VisitorController extends Controller
         return view('add_visitor')->with("user",$user);
     }
 
+    function checkin()
+    {
+
+        return view('frontend/checkin');
+    }
+
     function add_validation(Request $request)
     {
         $request->validate([
@@ -119,12 +126,12 @@ class VisitorController extends Controller
             'visitor_id'             =>  $data['visitor_id'],
             'visitor_meet_person_name'  =>  $data['visitor_meet_person_name'],
             'visitor_purpose'        =>  $data['visitor_purpose'],
-            'visitor_status'        =>  $data['visitor_status'],
+            'visitor_status'        =>  'Pending',
             'visitor_enter_by'       =>   Auth::user()->id,
           
         ]);
 
-        return redirect('visitor')->with('success', 'New Visitors Added');
+        return redirect('visitor')->with('success', 'New Visitor Added');
     }
 
     function delete($id)

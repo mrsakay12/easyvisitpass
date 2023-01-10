@@ -35,7 +35,7 @@
 					<thead>
 						<tr>
 							<th>Department Name</th>
-							<th>Contact Person / Number</th>
+							<th>Department Location</th>
 							@if(Auth::user()->type == 'Admin')
 							<th>Action</th>
 							@endif

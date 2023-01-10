@@ -28,14 +28,23 @@ class SubUserController extends Controller
     {
         if($request->ajax())
         {
-            $data = User::where('type', '!=', 'Admin')->get();
+            $data = User::get();
 
             return DataTables::of($data)
                     ->addIndexColumn()
                     ->addColumn('action', function($row){
-                        return '<a href="/sub_user/edit/'.$row->id.'" class="btn btn-primary btn-sm">Edit</a>&nbsp;<button type="button" class="btn btn-danger btn-sm delete" data-id="'.$row->id.'">Delete</button>';
+                        if($row->profile == 'New' )
+                        {
+                        return '<a href="/employee/add/'.$row->id.'" class="btn btn-success btn-sm">Add Profile</a>&nbsp;<button type="button" class="btn btn-danger btn-sm delete" data-id="'.$row->id.'">Delete</button>';
+                        }else
+                        {
+                            return '<a href="/sub_user/edit/'.$row->id.'" class="btn btn-primary btn-sm">Edit Profile</a>&nbsp;<button type="button" class="btn btn-danger btn-sm delete" data-id="'.$row->id.'">Delete</button>';
+                        }
                     })
+                    
                     ->rawColumns(['action'])
+        
+                  
                     ->make(true);
         }
     }
@@ -62,6 +71,7 @@ class SubUserController extends Controller
             'password'  =>  Hash::make($data['password']),
             'type'      =>  $data['type'],
             'status'      =>  $data['status'],
+            'profile'      =>  $data['profile'],
         ]);
 
         return redirect('sub_user')->with('success', 'New User Added');
@@ -98,8 +108,8 @@ class SubUserController extends Controller
             $form_data = array(
                 'name'      =>  $data['name'],
                 'email'     =>  $data['email'],
-                'status'  => $data['status'],
-                'type'  => $data['type'],
+                'status'    =>  $data['status'],
+                'type'      =>  $data['type'],
             );
         }
 
