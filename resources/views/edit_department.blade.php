@@ -25,9 +25,9 @@
 		        		@endif
 		        	</div>
 		        	<div class="form-group mb-3">
-		        		<label><b>Contact Person/Number</b></label>
+		        		<label><b>Department Location</b></label>
 		        		@php
-		        		$contact_person = explode(", ", $data->contact_person);
+		        		$contact_person = explode("/", $data->contact_person);
 		        		@endphp
 
 		        		@for($i = 0; $i < count($contact_person); $i++)

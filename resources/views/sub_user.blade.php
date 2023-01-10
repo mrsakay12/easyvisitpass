@@ -34,8 +34,10 @@
 							<th>User ID</th>
 							<th>User Email</th>
 							<th>Role</th>
+							<th>Status</th>
 							@if(Auth::user()->type == 'Admin')
 							<th>Action</th>
+					
 							@endif
 						</tr>
 					</thead>
@@ -64,6 +66,10 @@ $(function(){
 			{
 				data:'type',
 				name:'type'
+			},
+			{
+				data:'status',
+				name:'status'
 			},
 			
 			@if(Auth::user()->type == 'Admin')

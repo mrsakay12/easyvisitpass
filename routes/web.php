@@ -27,6 +27,11 @@ Route::get('/', function () {
     return view('auth.login');
 });
 
+//Front End Route
+Route::get('home', [CustomAuthController::class, 'home'])->name('home');
+Route::get('checkin', [VisitorController::class, 'checkin'])->name('visitor.checkin');
+Route::post('visitor/add_validation', [VisitorController::class, 'add_validation'])->name('visitor.add_validation');
+
 Route::get('registration', [CustomAuthController::class, 'registration'])->name('register');
 
 Route::post('custom-registration', [CustomAuthController::class, 'custom_registration'])->name('register.custom');
@@ -39,15 +44,24 @@ Route::get('dashboard', [CustomAuthController::class, 'dashboard'])->name('dashb
 
 Route::redirect('/', '/dashboard')->name('dashboard');
 
+
+
 Route::get('logout', [CustomAuthController::class, 'logout'])->name('logout');
 
 Route::get('profile', [ProfileController::class, 'index'])->name('profile');
 
+
 Route::post('profile/edit_validation', [ProfileController::class, 'edit_validation'])->name('profile.edit_validation');
 
 
+
+
+
 Route::post('employee/edit_validation', [EmployeeController::class, 'edit_validation'])->name('employee.edit_validation');
+Route::get('employee/add/{id}', [EmployeeController::class, 'add'])->name('add');
 Route::post('employee/add_validation', [EmployeeController::class, 'add_validation'])->name('employee.add_validation');
+Route::get('/getDept/{id}', [EmployeeController::class, 'getDept']);
+
 
 
 

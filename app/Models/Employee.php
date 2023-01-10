@@ -26,6 +26,7 @@ class Employee extends Model
         'about', 
         'user_id', 
         'created_by', 
+        'address',
         
         
 ];

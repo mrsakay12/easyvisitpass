@@ -43,7 +43,9 @@
 							<th>Check-in </th>
 							<th>Check-out</th>
 							<th>Status</th>
+							@if(Auth::user()->type != 'Receptionist')
 							<th>User Action</th>
+							@endif
 							@if(Auth::user()->type != 'User')
 							<th>Reception Action</th>
 							@endif
@@ -56,6 +58,8 @@
 	</div>
 </div>
 <script>
+
+	
 $(document).ready(function(){
 
 	var table = $('#visitor_table').DataTable({
@@ -90,8 +94,9 @@ $(document).ready(function(){
 				name:'visitor_purpose'
 			},
 			{
-				data:'visitor_enter_time',
-				name: 'visitor_enter_time'
+				data:'visitor_enter_time', 
+				name: 'visitor_enter_time',
+				
 			},
 			{
 				data:'visitor_out_time',
@@ -101,11 +106,14 @@ $(document).ready(function(){
 				data:'visitor_status',
 				name:'visitor_status'
 			},
+			@if(Auth::user()->type != 'Receptionist')
 			{
 				data:'action',
 				name:'action',
 				orderable:false
-			},
+			}
+			,
+			@endif
 			@if(Auth::user()->type != 'User')
 			{
 				data:'arrival',

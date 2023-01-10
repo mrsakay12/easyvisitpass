@@ -16,6 +16,8 @@ class AddNewFieldsToUsersTable extends Migration
         Schema::table('users', function (Blueprint $table) {
             //
             $table->enum('type', ['Admin', 'User','Receptionist']);
+            $table->enum('status', ['Active', 'De-Active']);
+            $table->enum('profile', ['New', 'With Profile']);
         });
     }
 

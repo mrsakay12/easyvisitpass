@@ -20,7 +20,7 @@
 					@csrf
 					<div class="form-group mb-3">
 		        
-						<input type="hidden" name="visitor_code" class="form-control" placeholder="" value="0" />
+						<input type="hidden" name="visitor_code" class="form-control" placeholder="" value="" />
 						<input type="hidden" name="visitor_status" class="form-control" placeholder="" value="Pending" />
 		        	
 		        	</div>
