@@ -1,68 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Easy Visit Pass</title>
+@extends('frontend\frontbar')
 
-    <!-- Bootstrap CSS -->
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
-    />
-
-    <!-- AOS Animate -->
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
-
-    <!-- Box Icons CSS -->
-    <link
-      href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
-      rel="stylesheet"
-    />
-
-    <link rel="stylesheet" href="{{ asset('css/frontend.css') }}"  />
-  </head>
-  <body>
-    <!-- Navbar Section -->
-    <nav class="navbar navbar-expand-lg bg-white">
-      <div class="container">
-        <a class="navbar-brand" href="#">
-          <img
-           src="{{ asset('/Images/logo3.png') }}"
-            alt="logo"
-            width="50"
-            height="50"
-            class="d-inline-block align-middle"
-          />
-          <span>EV</span><span class="span-pass"> - Pass</span>
-        </a>
-        <button
-          class="navbar-toggler shadow-none"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarNavAltMarkup"
-          aria-controls="navbarNavAltMarkup"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <i class="bx bx-menu"></i>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-          <div class="navbar-nav ms-auto">
-            <a class="nav-link active" aria-current="page" href="#"
-              >Have Appointment</a
-            >
-            <a class="nav-link" href="return.html">Been Here Before</a>
-          </div>
-          <a href="#" class="btn btn-primary shadow-none">Login</a>
-        </div>
-      </div>
-    </nav>
+@section('content')
 
     <!-- HERO SECTION -->
-
+ 
     <section class="hero">
+    <form method="POST" action="{{ route('checkin_validation') }}">
+    @csrf
       <div class="container">
         <div class="row">
           <div class="col md-6">
@@ -71,19 +15,25 @@
                 <h4>Visitor Details</h4>
               </div>
             </div>
-            <form action="method">
+            <input type="hidden" name="visitor_code" class="form-control" placeholder="" value="EVPASS0001" />
+						<input type="hidden" name="visitor_status" class="form-control" placeholder="" value="Pending" />
+            <input type="hidden" name="visitor_enter_by" class="form-control" placeholder="" value="0" />
+
               <div class="row">
                 <div class="col">
-                  <label for="inputEmail4" class="form-label"
-                    >First Name<span class="text-danger">*</span></label
-                  >
+                  <label for="inputEmail4" class="form-label">First Name<span class="text-danger">*</span></label>
                   <input
                     type="text"
                     class="form-control"
                     placeholder="First name"
                     aria-label="First name"
+                    name="visitor_firstname"
                   />
+                  @if($errors->has('visitor_firstname'))
+		        			<span class="text-danger">{{ $errors->first('visitor_firstname') }}</span>
+		        		@endif
                 </div>
+             
                 <div class="col">
                   <label for="inputEmail4" class="form-label"
                     >Last Name<span class="text-danger">*</span></label
@@ -93,23 +43,31 @@
                     class="form-control"
                     placeholder="Last name"
                     aria-label="Last name"
+                    name="visitor_lastname"
                   />
+                  @if($errors->has('visitor_lastname'))
+		        			<span class="text-danger">{{ $errors->first('visitor_lastname') }}</span>
+		        		@endif
                 </div>
               </div>
               <div class="row">
                 <div class="col">
                   <label for="inputEmail4" class="form-label"
-                    >Select Employee<span class="text-danger">*</span></label
-                  >
+                    >Select Employee<span class="text-danger">*</span></label>
+
                   <select
                     class="form-select"
+                    id='visitor_meet_person_name' name='visitor_meet_person_name'
                     aria-label="Default select example"
                   >
                     <option selected>Select Employee</option>
-                    <option value="1">Michael Sakay (Team Lead)</option>
-                    <option value="2">John Aldrine Ilao</option>
-                    <option value="3">Normita Burce</option>
+                    @foreach($user['data'] as $user)
+                 <option value='{{ $user->id }}'>{{ $user->name }}</option>
+                      @endforeach
                   </select>
+                  @if($errors->has('visitor_meet_person_name'))
+		        			<span class="text-danger">{{ $errors->first('visitor_meet_person_name') }}</span>
+		        		@endif
                 </div>
                 <div class="col">
                   <label class="label-css" for=""
@@ -117,11 +75,14 @@
                   >
                   <input
                     type="text"
-                    name="phone"
-                    id="phone"
+                    name="visitor_mobile_no"
+                    id="visitor_mobile_no"
                     class="form-control input-css"
-                    value=""
+                
                   />
+                  @if($errors->has('visitor_mobile_no'))
+		        			<span class="text-danger">{{ $errors->first('visitor_mobile_no') }}</span>
+		        		@endif
                 </div>
               </div>
               <div class="row">
@@ -129,7 +90,10 @@
                   <label for="inputEmail4" class="form-label"
                     >Email<span class="text-danger">*</span></label
                   >
-                  <input type="email" class="form-control" id="inputEmail4" />
+                  <input type="email" class="form-control" id="inputEmail4"  name="visitor_email"      placeholder="Email Address"/>
+                  @if($errors->has('visitor_email'))
+		        			<span class="text-danger">{{ $errors->first('visitor_email') }}</span>
+		        		@endif
                 </div>
                 <div class="col">
                   <label for="inputEmail4" class="form-label"
@@ -137,78 +101,92 @@
                   >
                   <select
                     class="form-select"
+                    name="visitor_gender"
                     aria-label="Default select example"
                   >
-                    <option selected>Male</option>
-                    <option value="1">Female</option>
+                    <option value="Male" selected>Male</option>
+                    <option value="Female">Female</option>
                   </select>
+                  @if($errors->has('visitor_gender'))
+		        			<span class="text-danger">{{ $errors->first('visitor_gender') }}</span>
+		        		@endif
                 </div>
               </div>
               <div class="row">
                 <div class="col">
-                  <label for="inputEmail4" class="form-label"
-                    >Company Name<span class="text-danger">*</span></label
-                  >
-                  <input
-                    type="text"
-                    class="form-control"
-                    placeholder="First name"
-                    aria-label="First name"
-                  />
+                <label for="inputEmail4" class="form-label" >Visit Date & Time.<span class="text-danger">*</span></label>
+                <input type="datetime-local" class="form-control"  id="visit_date" name="visit_time">
+                @if($errors->has('visit_date'))
+		        			<span class="text-danger">{{ $errors->first('visit_date') }}</span>
+		        		@endif
                 </div>
                 <div class="col">
                   <label for="inputEmail4" class="form-label"
-                    >National ID No.<span class="text-danger">*</span></label
+                    >Presented ID No.<span class="text-danger">*</span></label
                   >
                   <input
                     type="text"
                     class="form-control"
-                    placeholder="Last name"
+                    placeholder="Presented ID No."
                     aria-label="Last name"
+                    name="visitor_id" 
                   />
+                  @if($errors->has('visitor_id'))
+		        			<span class="text-danger">{{ $errors->first('visitor_id') }}</span>
+		        		@endif
                 </div>
               </div>
               <div class="row">
                 <div class="col">
                   <div class="mb-3">
                     <label for="exampleFormControlTextarea1" class="form-label"
-                      >Purpose<span class="text-danger">*</span></label
+                      >Address<span class="text-danger">*</span></label
                     >
                     <textarea
                       class="form-control"
                       id="exampleFormControlTextarea1"
                       rows="3"
+                      name="visitor_address"
                     ></textarea>
+                    @if($errors->has('visitor_address'))
+		        			<span class="text-danger">{{ $errors->first('visitor_address') }}</span>
+		        		@endif
                   </div>
                 </div>
                 <div class="col">
                   <div class="mb-3">
                     <label for="exampleFormControlTextarea1" class="form-label"
-                      >Address</label
+                      > Purpose<span class="text-danger">*</span></label
                     >
                     <textarea
                       class="form-control"
                       id="exampleFormControlTextarea1"
                       rows="3"
+                  
+                      name="visitor_purpose"
                     ></textarea>
+                    @if($errors->has('visitor_purpose'))
+		        			<span class="text-danger">{{ $errors->first('visitor_purpose') }}</span>
+		        		@endif
                   </div>
                 </div>
               </div>
               <div class="cta">
-                <a href="#" class="btn btn-cancel-red shadow-none">Cancel</a>
-                <a href="#" class="btn btn-secondary shadow-none float-lg-end"
-                  >Continue</a
-                >
+                <a href="\home" class="btn btn-cancel-red shadow-none">Cancel</a>
+               <input class="btn btn-primary shadow-none float-lg-end"  type="submit"  value="Continue" />
+		        	
+		        
               </div>
-            </form>
+           
           </div>
           <div class="col-md-6">
             <img src="img/hero-section.png" class="w-100" alt="" />
           </div>
         </div>
       </div>
+
+      </form>
     </section>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-  </body>
-</html>
+    @endsection

@@ -7,6 +7,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Hash;
 use Session;
+use App\Models\Visitor;
 
 class CustomAuthController extends Controller
 {
@@ -80,4 +81,76 @@ class CustomAuthController extends Controller
         return redirect('login')->with('success', 'You have successfully been logged out');
         
     }
+    
+    function checkin()
+    {
+        $user['data'] = User::orderby("name","asc")->where('type', '=', 'User')->where('status', '=', 'Active')
+        ->select('id','name')
+        ->get();
+        
+        return view('frontend/checkin')->with("user",$user);
+    }
+
+    function checkid()
+    {
+        
+        $visitor = Session::get('data');
+
+        return view('frontend/checkin_two')->with("visitor", $visitor);
+      
+    }
+    function preregister()
+    {
+
+        return view('frontend/pre_register');
+    }
+    function return()
+    {
+
+        return view('frontend/return');
+    }
+
+    function checkin_validation(Request $request)
+    {
+        $request->validate([
+
+            'visitor_purpose'      =>  'required',
+            'visitor_firstname'      =>  'required',
+            'visitor_lastname'      =>  'required',
+            'visitor_email'      =>  'required',
+            'visitor_mobile_no'      =>  'required',
+            'visitor_gender'      =>  'required',
+            'visitor_address'      =>  'required',
+            'visitor_id'      =>  'required',
+            'visitor_meet_person_name'      =>  'required',
+           
+            'visit_time'      =>  'required',
+            
+            
+        ]);
+
+        $data = $request->all();
+
+      
+        $visitor = Visitor::create([
+            'visitor_code'           =>  $data['visitor_code'],
+            'visitor_firstname'      =>  $data['visitor_firstname'],
+            'visitor_lastname'       =>  $data['visitor_lastname'],
+            'visitor_email'          =>  $data['visitor_email'],
+            'visitor_mobile_no'      =>  $data['visitor_mobile_no'],
+            'visitor_gender'         =>  $data['visitor_gender'],
+            'visitor_address'        =>  $data['visitor_address'],
+            'visitor_id'             =>  $data['visitor_id'],
+            'visitor_meet_person_name'  =>  $data['visitor_meet_person_name'],
+            'visitor_purpose'        =>  $data['visitor_purpose'],
+            'visitor_status'        =>  'Pending',
+            'visitor_enter_by'       =>    $data['visitor_enter_by'],
+            'visit_time'       =>    $data['visit_time'],
+          
+        ]);
+
+        return redirect('checkin-id')->with(['success'=>'Message','data'=>$visitor]) ;
+    }
+
+   
 }

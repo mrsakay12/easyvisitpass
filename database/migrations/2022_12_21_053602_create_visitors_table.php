@@ -25,7 +25,8 @@ class CreateVisitorsTable extends Migration
             $table->string('visitor_id');
             $table->string('visitor_meet_person_name');
             $table->string('visitor_purpose');
-            $table->dateTime('visitor_enter_time')->nullable();
+            $table->dateTime('visitor_enter_time');
+            $table->dateTime('visit_time')->nullable();
             $table->dateTime('visitor_out_time')->nullable();
             $table->enum('visitor_status', ['In', 'Out','Pending','Rejected','Lobby']);
             $table->integer('visitor_enter_by');

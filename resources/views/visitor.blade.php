@@ -73,7 +73,7 @@ $(document).ready(function(){
 				name: 'visitor_code'
 			},
 			{
-				data:'visitor_firstname',
+				data: 'visitor_firstname',
 				name: 'visitor_firstname'
 			},
 			{

@@ -21,7 +21,7 @@
 		        		<label><b>Department Name</b></label>
 		        		<input type="text" name="department_name" class="form-control" />
 		        		@if($errors->has('department_name'))
-		        			<span class="text-danger">{{ $errors->first('department_name') }}</span>
+		        			<span class="text-danger ">{{ $errors->first('department_name') }}</span>
 		        		@endif
 		        	</div>
 		        	<div class="form-group mb-3">
