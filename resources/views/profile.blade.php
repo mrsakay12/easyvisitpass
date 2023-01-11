@@ -47,7 +47,7 @@
 	</div>
 
 
-	<div class="col-md-8">
+	<!-- <div class="col-md-8">
 		<div class="card">
 			<div class="card-header">Edit Profile</div>
 			<div class="card-body">
@@ -118,7 +118,67 @@
 				</form>
 			</div>
 		</div>
-	</div>
+	</div> -->
+
+
+
+	<div class="col-md-8">
+    <div class="card">
+        <div class="card-header">Edit Profile</div>
+        <div class="card-body">
+            <form method="post" action="{{ route('employee.add_validation') }}">
+                @csrf
+                <div class="form-group mb-3 row">
+                    <div class="col-md-6">
+                        <label><b>First Name</b></label>
+                        <input type="text" name="first_name" class="form-control" placeholder="First Name" value="{{ $data->first_name }}" />
+                    </div>
+                    <div class="col-md-6">
+                        <label><b>Last Name</b></label>
+                        <input type="text" name="last_name" class="form-control" placeholder="Last Name" value="{{ $data->last_name }}" />
+                    </div>
+                </div>
+
+                <div class="form-group mb-3 row">
+                    <div class="col-md-6">
+                        <label><b>Nickname</b></label>
+                        <input type="text" name="nickname" class="form-control" placeholder="nickname" value="{{ $data->nickname }}" />
+                    </div>
+                    <div class="col-md-6">
+					<label><b>Gender</b></label>
+		        		
+						<select class="form-control"  name="gender" aria-label="Default select example" value="{{ $data->gender}}" >
+								<option >-- Select Gender --</option>
+								<option value="Male">Male</option>
+								<option value="Female">Female</option>
+						</select>
+                    </div>
+                </div>
+
+                <div class="form-group mb-3 row">
+                    <div class="col-md-6">
+                        <label><b>About Me</b></label>
+                        <input type="text" name="about_me" class="form-control" placeholder="About Me" value="{{ $data->about_me }}" />
+                    </div>
+                    <div class="col-md-6">
+                        <label><b>Phone</b></label>
+                        <input type="text" name="phone" class="form-control" placeholder="phone" value="{{ $data->phone }}" />
+                    </div>
+                </div>
+
+                <div class="form-group mb-3 row">
+                    <div class="col-md-6">
+                        <label><b>Department</b></label>
+                        <input type="text" name="department" class="form-control" placeholder="department_id" value="{{ $data->department }}" />
+                    </div>
+                    <div class="col-md-6">
+                        <label><b>Designation</b></label>
+                        <input type="text" name="designation" class="form-control" placeholder="designation_id" value="{{ $data->designation }}" />
+                    </div>
+                </div>
+                <div class="form-group mb-3">
+                    <input type="submit" class="btn btn-primary" value="Submit" />
+                </div
 
 </div>
  <!-- Script -->
