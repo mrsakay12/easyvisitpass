@@ -3,7 +3,7 @@
 <head>
     <title>Easy Visit Pass</title>
     <link rel="stylesheet" href="{{ asset('css/bootstrap.css') }}" />
-    <link rel="icon" href="{{ asset('Images/logo.png') }}" />
+    <link rel="icon" href="{{ asset('Images/logo4.png') }}" />
 </head>
 <body>
 

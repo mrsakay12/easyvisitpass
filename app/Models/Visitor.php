@@ -26,4 +26,8 @@ class Visitor extends Model
                 'visit_time',
                 
     ];
+
+    public function userid(){
+        return $this->belongsTo('App\Models\User','user_id')->withDefault();
+    }
 }

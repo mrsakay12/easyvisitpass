@@ -20,7 +20,7 @@
       href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
       rel="stylesheet"
     />
-
+    <link rel="icon" href="{{ asset('Images/logo4.png') }}" />
     <link rel="stylesheet" href="{{ asset('css/frontend.css') }}" />
   </head>
   <body>

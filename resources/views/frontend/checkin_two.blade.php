@@ -66,7 +66,7 @@
    
  
     
-    <link rel="stylesheet" href="https://demo.quickpass.xyz/css/id-card-print.css">
+  
 
    
 

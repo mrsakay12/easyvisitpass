@@ -39,7 +39,6 @@ Route::post('visitor/add_validation', [VisitorController::class, 'add_validation
 
 
 
-
 Route::get('registration', [CustomAuthController::class, 'registration'])->name('register');
 
 Route::post('custom-registration', [CustomAuthController::class, 'custom_registration'])->name('register.custom');

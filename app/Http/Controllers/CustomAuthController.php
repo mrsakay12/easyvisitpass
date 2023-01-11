@@ -93,10 +93,10 @@ class CustomAuthController extends Controller
 
     function checkid()
     {
-        $query = Visitor::join('users', 'users.id', '=', 'visitor_meet_person_name');
+        
         $visitor = Session::get('data');
-        $data = $query->get(['users.name']);
-        return view('frontend/checkin_two')->with("visitor", $visitor)->with("data", $data);
+
+        return view('frontend/checkin_two')->with("visitor", $visitor);
       
     }
     function preregister()
