@@ -23,7 +23,7 @@
 					@csrf
 					<div class="form-group mb-3">
 		        
-						<input type="hidden" name="visitor_code" class="form-control" placeholder="" value="" />
+						<input type="hidden" name="visitor_code" class="form-control" placeholder="" value="0000" />
 						<input type="hidden" name="visitor_status" class="form-control" placeholder="" value="Pending" />
 		        	
 		        	</div>
@@ -120,10 +120,12 @@
 						</div>
 						<div class="col-md-6">
 							<label><b>Select Employee</b></label>
-							<select class="form-control" name="visitor_employee">
-							<option>---> choose</option>
-							<!-- options for employees go here -->
-							</select>
+							<select id='visitor_meet_person_name' name='visitor_meet_person_name' class="form-control" >
+                 <option >-- Select employee --</option>
+                      @foreach($user['data'] as $user)
+                 <option value='{{ $user->id }}'>{{ $user->name }}</option>
+                      @endforeach
+					</select>
 							@if($errors->has('visitor_employee'))
 							<span class="text-danger">{{ $errors->first('visitor_employee') }}</span>
 							@endif
