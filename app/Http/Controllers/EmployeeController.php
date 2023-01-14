@@ -120,16 +120,5 @@ class EmployeeController extends Controller
       }
 
       
-    public function getDept2($departmentid=0){
-
-        // Fetch Designation by Departmentid
-        $empData['data'] = Designation::orderby("designation_name","asc")->where('status', '=', 'Active')
-           ->select('id','designation_name')
-           ->where('department_id',$departmentid)
-           ->get();
-   
-        return response()->json($empData);
-   
-      }
 
 }

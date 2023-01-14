@@ -78,7 +78,8 @@ body {
 .sidebar-heading {
     font-size: 0.75rem;
     text-transform: uppercase;
-aside .sidebar-sticky {
+}
+.aside .sidebar-sticky {
   position: relative;
   display: flex;
   flex-direction: column;
@@ -232,18 +233,11 @@ aside .sidebar-heading {
  }
 
  aside .sidebarMenu > div .nav-item span:hover {
-  color: orange;
+  color: rgb(4, 92, 173);
   margin-left: 1rem;
 }
 
 aside .sidebarMenu > div a:hover {
   margin-left: 1rem;
-  color: orange;
+  color:rgb(4, 92, 173);
 }
-
-
-
-
- 
-
- 

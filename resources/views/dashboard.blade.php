@@ -3,8 +3,8 @@
 <head>
     <title>Easy Visit Pass</title>
     <link rel="stylesheet" href="{{ asset('css/bootstrap.css') }}" />
-    <link rel="icon" href="{{ asset('Images/revlogo3.jpg') }}" />
-    <link rel="stylesheet" href="./app.css"> 
+    <link rel="icon" href="{{ asset('Images/logo4.png') }}" />
+
 </head>
 <body>
 
@@ -34,7 +34,7 @@
 
         <div class="navbar-nav">
             <div class="nav-item text-nowrap">
-                <div class="nav-link px-3" href="#">Welcome, {{ Auth::user()->name }}>
+                <div class="nav-link px-3" href="#">Welcome, {{ Auth::user()->name }}
                     <span class="material-symbols-outlined">person</span>
                     <a class="nav-link {{ Request::segment(1) == 'profile' ? 'active' : '' }}" aria-current="page" href="/profile">Profile</a>
                 </div>
