@@ -8,10 +8,11 @@ use App\Http\Requests\UpdateEmployeeRequest;
 use Illuminate\Support\Facades\Auth;
 
 use App\Models\User;
-use App\Traits\Userid;
+
 use App\Models\Department;
 use App\Models\Designation;
 use Hash;
+use Session;
 
 
 
@@ -49,10 +50,7 @@ class EmployeeController extends Controller
         ]);
 
         $data = $request->all();
-  
-        
-        
-           
+
             $form_data = array(
                 'first_name'    =>  $data['first_name'],
                 'last_name'     =>  $data['last_name'],
@@ -72,13 +70,14 @@ class EmployeeController extends Controller
         return redirect('profile')->with('success', 'Profile Data Updated');
     
     }
-    function add($id)
+    function add()
     {
-        $user = User::findOrFail($id);
+        $user = Session::get('data');
         $departments['data'] = Department::orderby("department_name","asc")
         ->select('id','department_name')
         ->get();
-        return view('add_employee', compact('data'))->with("departments",$departments);
+        return view('add_employee')->with("departments",$departments)->with("user", $user);
+ 
 
 
         
@@ -103,20 +102,25 @@ class EmployeeController extends Controller
             'user_id'       =>  $data['user_id'],
             'created_by'    =>  Auth::user()->id,
         ]);
-        $user = User::findOrFail($id);
-      
-        $form_data = array(
-           
-            'profile'          =>   'With Profile',
         
-           
-        );
-        User::whereId($id)->update($form_data);
 
-        return redirect('sub_user')->with('success', 'Profile Information Added');
+        return redirect('sub_user')->with('success', 'Employee Successfully Added');
     }
 
     public function getDept($departmentid=0){
+
+        // Fetch Designation by Departmentid
+        $empData['data'] = Designation::orderby("designation_name","asc")->where('status', '=', 'Active')
+           ->select('id','designation_name')
+           ->where('department_id',$departmentid)
+           ->get();
+   
+        return response()->json($empData);
+   
+      }
+
+      
+    public function getDept2($departmentid=0){
 
         // Fetch Designation by Departmentid
         $empData['data'] = Designation::orderby("designation_name","asc")->where('status', '=', 'Active')

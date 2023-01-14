@@ -115,7 +115,7 @@
               <div class="row">
                 <div class="col">
                 <label for="inputEmail4" class="form-label" >Visit Date & Time.<span class="text-danger">*</span></label>
-                <input type="datetime-local" class="form-control"  id="visit_date" name="visit_time">
+                <input type="datetime-local" class="form-control"  id="visit_time" name="visit_time">
                 @if($errors->has('visit_date'))
 		        			<span class="text-danger">{{ $errors->first('visit_date') }}</span>
 		        		@endif

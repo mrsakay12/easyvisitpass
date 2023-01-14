@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use Hash;
 use Session;
 use App\Models\Visitor;
+use App\Models\Visitdetail;
 
 class CustomAuthController extends Controller
 {
@@ -62,7 +63,9 @@ class CustomAuthController extends Controller
     {
         if(Auth::check())
         {
-            return view('dashboardmain');
+            $user = User::where('type', '=', 'User')->where('status', '=', 'Active')->count();
+            $visitor = Visitor::count();
+            return view('dashboardmain')->with("user", $user)->with("visitor", $visitor);
         }
 
         return redirect('login');
@@ -115,16 +118,15 @@ class CustomAuthController extends Controller
         $request->validate([
 
             'visitor_purpose'      =>  'required',
-            'visitor_firstname'      =>  'required',
-            'visitor_lastname'      =>  'required',
-            'visitor_email'      =>  'required',
-            'visitor_mobile_no'      =>  'required',
-            'visitor_gender'      =>  'required',
+            'visitor_firstname'    =>  'required',
+            'visitor_lastname'     =>  'required',
+            'visitor_email'        =>  'required|email|unique:visitdetails',
+            'visitor_mobile_no'    =>  'required',
+            'visitor_gender'       =>  'required',
             'visitor_address'      =>  'required',
-            'visitor_id'      =>  'required',
+            'visitor_id'           =>  'required',
             'visitor_meet_person_name'      =>  'required',
-           
-            'visit_time'      =>  'required',
+            'visit_time'           =>  'required',
             
             
         ]);
@@ -143,13 +145,25 @@ class CustomAuthController extends Controller
             'visitor_id'             =>  $data['visitor_id'],
             'visitor_meet_person_name'  =>  $data['visitor_meet_person_name'],
             'visitor_purpose'        =>  $data['visitor_purpose'],
-            'visitor_status'        =>  'Pending',
+            'visitor_status'         =>  'Pending',
             'visitor_enter_by'       =>    $data['visitor_enter_by'],
-            'visit_time'       =>    $data['visit_time'],
+            'visit_time'             =>    $data['visit_time'],
           
         ]);
 
-        return redirect('checkin-id')->with(['success'=>'Message','data'=>$visitor]) ;
+        Visitdetail::create([
+            'visitor_firstname'      =>  $data['visitor_firstname'],
+            'visitor_lastname'       =>  $data['visitor_lastname'],
+            'visitor_email'          =>  $data['visitor_email'],
+            'visitor_mobile_no'      =>  $data['visitor_mobile_no'],
+            'visitor_gender'         =>  $data['visitor_gender'],
+            'visitor_address'        =>  $data['visitor_address'],
+            'visitor_id'             =>  $data['visitor_id'],
+            'visitor_enter_by'       =>  $data['visitor_enter_by'],
+          
+        ]);
+
+        return redirect('checkin-id')->with(['success'=>'','data'=>$visitor]) ;
     }
 
    

@@ -127,6 +127,7 @@ class VisitorController extends Controller
             'visitor_purpose'        =>  $data['visitor_purpose'],
             'visitor_status'        =>  'Pending',
             'visitor_enter_by'       =>   Auth::user()->id,
+            'visit_time'             =>    $data['visit_time'],
           
         ]);
 

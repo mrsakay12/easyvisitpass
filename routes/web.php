@@ -65,9 +65,14 @@ Route::post('profile/edit_validation', [ProfileController::class, 'edit_validati
 
 
 Route::post('employee/edit_validation', [EmployeeController::class, 'edit_validation'])->name('employee.edit_validation');
-Route::get('employee/add/{id}', [EmployeeController::class, 'add'])->name('add');
+Route::get('employee/add', [EmployeeController::class, 'add'])->name('add');
 Route::post('employee/add_validation', [EmployeeController::class, 'add_validation'])->name('employee.add_validation');
+
+
 Route::get('/getDept/{id}', [EmployeeController::class, 'getDept']);
+
+
+
 
 
 

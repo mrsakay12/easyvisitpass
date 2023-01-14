@@ -138,10 +138,11 @@
 <!-- Company Name and Presented Id No. Start -->
 					<div class="form-group mb-3 row">
 						<div class="col-md-6">
-							<label><b>Company Name</b></label>
-							<input type="text" name="company_name" class="form-control" placeholder="Company Name" />
-							@if($errors->has('company_name'))
-								<span class="text-danger">{{ $errors->first('company_name') }}</span>
+							<label><b>Visit Date & Time.</b></label>
+							<input type="datetime-local" class="form-control"  id="visit_time" name="visit_time">
+
+							@if($errors->has('visit_time'))
+								<span class="text-danger">{{ $errors->first('visit_time') }}</span>
 							@endif
 						</div>
 						<div class="col-md-6">

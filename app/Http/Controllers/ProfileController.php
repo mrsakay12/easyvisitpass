@@ -20,9 +20,6 @@ class ProfileController extends Controller
     {
         $data = User::findOrFail(Auth::user()->id);
         $data2 = Employee::where('user_id', '=' ,Auth::user()->id)->firstOrFail();
-        
-        
-      
         $departments['data'] = Department::orderby("department_name","asc")
         ->select('id','department_name')
         ->get();

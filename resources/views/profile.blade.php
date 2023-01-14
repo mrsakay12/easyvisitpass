@@ -55,28 +55,28 @@
     <div class="card">
         <div class="card-header">Edit Profile</div>
         <div class="card-body">
-            <form method="post" action="{{ route('employee.add_validation') }}">
+            <form method="post" action="{{ route('employee.edit_validation') }}">
                 @csrf
                 <div class="form-group mb-3 row">
                     <div class="col-md-6">
                         <label><b>First Name</b></label>
-                        <input type="text" name="first_name" class="form-control" placeholder="First Name" value="{{ $data->first_name }}" />
+                        <input type="text" name="first_name" class="form-control" placeholder="First Name" value="{{ $data2->first_name }}" />
                     </div>
                     <div class="col-md-6">
                         <label><b>Last Name</b></label>
-                        <input type="text" name="last_name" class="form-control" placeholder="Last Name" value="{{ $data->last_name }}" />
+                        <input type="text" name="last_name" class="form-control" placeholder="Last Name" value="{{ $data2->last_name }}" />
                     </div>
                 </div>
 
                 <div class="form-group mb-3 row">
                     <div class="col-md-6">
                         <label><b>Nickname</b></label>
-                        <input type="text" name="nickname" class="form-control" placeholder="nickname" value="{{ $data->nickname }}" />
+                        <input type="text" name="nickname" class="form-control" placeholder="nickname" value="{{ $data2->nickname }}" />
                     </div>
                     <div class="col-md-6">
 					<label><b>Gender</b></label>
 		        		
-						<select class="form-control"  name="gender" aria-label="Default select example" value="{{ $data->gender}}" >
+						<select class="form-control"  name="gender" aria-label="Default select example" value="{{ $data2->gender}}" >
 								<option >-- Select Gender --</option>
 								<option value="Male">Male</option>
 								<option value="Female">Female</option>
@@ -87,12 +87,25 @@
                 <div class="form-group mb-3 row">
                     <div class="col-md-6">
                         <label><b>About Me</b></label>
-                        <input type="text" name="about_me" class="form-control" placeholder="About Me" value="{{ $data->about_me }}" />
+                        <input type="text" name="about" class="form-control" placeholder="About Me" value="{{ $data2->about }}" />
                     </div>
                     <div class="col-md-6">
                         <label><b>Phone</b></label>
-                        <input type="text" name="phone" class="form-control" placeholder="phone" value="{{ $data->phone }}" />
+                        <input type="text" name="phone" class="form-control" placeholder="phone" value="{{ $data2->phone }}" />
                     </div>
+                </div>
+
+				<div class="form-group mb-3 row">
+				<div class="form-group mb-3">
+                        <label><b>Address</b></label>
+                  
+						<input type="text"
+                      class="form-control"
+                    
+                      rows="2"
+                      name="address"
+					  value="{{$data2->address}}" />
+					</div>
                 </div>
 
                 <div class="form-group mb-3 row">
@@ -113,12 +126,16 @@
 							</select>
 							</div>
                 </div>
+
+				
+
+
                 <div class="form-group mb-3">
+				<input type="hidden" name="hidden_id" value="{{ $data2->id }}" />
                     <input type="submit" class="btn btn-primary" value="Submit" />
                 </div
-
-</div>
- <!-- Script -->
+				</div>
+				
  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
    <script type='text/javascript'>
    $(document).ready(function(){

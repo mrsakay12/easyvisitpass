@@ -1,5 +1,8 @@
 @extends('dashboard')
+
 @section('content')
+<link rel="stylesheet" href="{{ asset('css/dashcard.css') }}" />
+
 <h2 class="mt-3">Dashboard</h2>
 <nav aria-label="breadcrumb">
   	<ol class="breadcrumb">
@@ -14,29 +17,165 @@
 	</div>
 
 	@endif
-	<div class="card">
-		<div class="card-header">
-			<div class="row">
-				<div class="col col-md-6">Total Employee</div>
-				<div class="col col-md-6">
-				
-				</div>
-			</div>
-		</div>
-		<div class="card-body">
-			<div class="table-responsive">
-				<table class="table table-bordered" id="">
-					<thead>
-						<tr>
-							<th>45</th>
-						
-						</tr>
-					</thead>
-					<tbody></tbody>
-				</table>
-			</div>
-		</div>
-	</div>
+
+	<div class="row">
+        <div class="col-lg-3 col-md-6 col-sm-6 col-12">
+            <a href="">
+                <div class="card card-statistic-1">
+                    <div class="card-icon bg-danger">
+                        <i class="far fa-user"></i>
+                    </div>
+                    <div class="card-wrap">
+                        <div class="card-header">
+                            <h4>Total Employees</h4>
+                        </div>
+                        <div class="card-body">
+						{{$user}}
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <div class="col-lg-3 col-md-6 col-sm-6 col-12">
+            <a href="">
+                <div class="card card-statistic-1">
+                    <div class="card-icon bg-primary">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <div class="card-wrap">
+                        <div class="card-header">
+                            <h4>Total Visitors</h4>
+                        </div>
+                        <div class="card-body">
+						{{$visitor}}
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+		<div class="col-lg-3 col-md-6 col-sm-6 col-12">
+            <a href="">
+                <div class="card card-statistic-1">
+                    <div class="card-icon bg-secondary">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <div class="card-wrap">
+                        <div class="card-header">
+                            <h4>Total Registered Visitors</h4>
+                        </div>
+                        <div class="card-body">
+                            12
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+        <div class="col-lg-3 col-md-6 col-sm-6 col-12">
+            <a href="">
+                <div class="card card-statistic-1">
+                    <div class="card-icon bg-warning">
+                        <i class="fas fa-user-secret"></i>
+                    </div>
+                    <div class="card-wrap">
+                        <div class="card-header">
+                            <h4>Total Pre Registers</h4>
+                        </div>
+                        <div class="card-body">
+                            10
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </div>
+
 </div>
+ <!-- General JS Scripts -->
+<script src="https://demo.quickpass.xyz/assets/modules/jquery/dist/jquery.min.js"></script>
+<script src="https://demo.quickpass.xyz/assets/modules/popper.js/dist/popper.min.js"></script>
+<script src="https://demo.quickpass.xyz/assets/modules/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="https://demo.quickpass.xyz/assets/modules/jquery.nicescroll/dist/jquery.nicescroll.min.js"></script>
+<script src="https://demo.quickpass.xyz/assets/modules/moment/min/moment.min.js"></script>
+<script src="https://demo.quickpass.xyz/assets/js/dropzone.min.js"></script>
+<script src="https://demo.quickpass.xyz/assets/js/stisla.js"></script>
+
+<!-- JS Libraies -->
+<script src="https://demo.quickpass.xyz/assets/modules/izitoast/dist/js/iziToast.min.js"></script>
+
+<!-- Template JS File -->
+<script src="https://demo.quickpass.xyz/assets/js/scripts.js"></script>
+<script src="https://demo.quickpass.xyz/js/custom.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.3.2/firebase.js"></script>
+
+<script type="text/javascript">
+    var beep = document.getElementById("myAudio1");
+
+    function sound() {
+        beep.play();
+    }
+    $(document).ready(function() {
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
+        // web_token
+        var firebaseConfig = {
+            apiKey: "AIzaSyCwsKNDXae_U6PVp28rUsyeUVLZJGd2JsQ",
+            authDomain: "visitor-app-f4cf8.firebaseapp.com",
+            projectId: "visitor-app-f4cf8",
+            storageBucket: "visitor-app-f4cf8.appspot.com",
+            messagingSenderId: "916840265010",
+            appId: "1:916840265010:web:0a79ffc97842d18924932b",
+            measurementId: "G-B6CDGMQ910"
+        };
+        firebase.initializeApp(firebaseConfig);
+        const messaging = firebase.messaging();
+        startFCM();
+
+        function startFCM() {
+            messaging.requestPermission()
+                .then(function() {
+                    return messaging.getToken()
+                })
+                .then(function(response) {
+                    $.ajax({
+                        url: 'https://demo.quickpass.xyz/admin/store-token',
+                        type: 'POST',
+                        data: {
+                            token: response
+                        },
+                        dataType: 'JSON',
+                        success: function(response) {
+
+                        },
+                        error: function(error) {
+
+                        },
+                    });
+                }).catch(function(error) {
+
+                });
+        }
+        messaging.onMessage(function(payload) {
+            const title = payload.notification.title;
+            const options = {
+                body: payload.notification.body,
+                icon: payload.notification.icon,
+            };
+
+            sound();
+            window.location.reload();
+            new Notification(title, options);
+        });
+
+        
+            });
+</script>
+    </body>
+
+</html>
 
 @endsection

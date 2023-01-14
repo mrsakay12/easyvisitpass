@@ -15,14 +15,14 @@
             </div>
             <div class="form-group">
               <label for="email" class="control-label heading mb-1"
-                >Visitor's Email or Phone or NID<span class="text-danger"
+                >Visitor's Email<span class="text-danger"
                   >*</span
                 ></label
               >
               <input
                 class="form-control input mb-4"
                 id="email"
-                placeholder="Search email , phone or national ID.."
+                placeholder="Search email ..."
                 name="email"
                 type="text"
                 required

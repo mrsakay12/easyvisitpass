@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Models\User;
+use App\Models\Employee;
 
 use DataTables;
 
@@ -33,13 +34,9 @@ class SubUserController extends Controller
             return DataTables::of($data)
                     ->addIndexColumn()
                     ->addColumn('action', function($row){
-                        if($row->profile == 'New' )
-                        {
-                        return '<a href="/employee/add/'.$row->id.'" class="btn btn-success btn-sm">Add Profile</a>&nbsp;<button type="button" class="btn btn-danger btn-sm delete" data-id="'.$row->id.'">Delete</button>';
-                        }else
-                        {
-                            return '<a href="/sub_user/edit/'.$row->id.'" class="btn btn-primary btn-sm">Edit Profile</a>&nbsp;<button type="button" class="btn btn-danger btn-sm delete" data-id="'.$row->id.'">Delete</button>';
-                        }
+                       
+                            return '<a href="/sub_user/edit/'.$row->id.'" class="btn btn-primary btn-sm">Edit </a>&nbsp;<button type="button" class="btn btn-danger btn-sm delete" data-id="'.$row->id.'">Delete</button>';
+                       
                     })
                     
                     ->rawColumns(['action'])
@@ -65,7 +62,7 @@ class SubUserController extends Controller
 
         $data = $request->all();
 
-        User::create([
+        $user = User::create([
             'name'      =>  $data['name'],
             'email'     =>  $data['email'],
             'password'  =>  Hash::make($data['password']),
@@ -74,7 +71,8 @@ class SubUserController extends Controller
             'profile'      =>  $data['profile'],
         ]);
 
-        return redirect('sub_user')->with('success', 'New User Added');
+      
+        return redirect('employee/add')->with(['success'=>'','data'=>$user]) ;
     }
 
     public function edit($id)
