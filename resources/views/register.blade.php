@@ -19,13 +19,13 @@
 		<div class="card-header">
 			<div class="row">
 				<div class="col col-md-8">Visitor Management</div>
-				@if(Auth::user()->type == 'Admin')
+			
 
 				<div class="col col-md-4">
 					<a href="{{ route('register.add') }}" class="btn btn-success btn-sm float-end">Add</a>
 				</div>
 				
-				@endif
+			
 			
 			</div>
 		</div>
@@ -40,7 +40,8 @@
 							<th>Phone</th>
 							<th>Gender</th>
 							<th>Address </th>
-							<th>Visited To</th>
+							<th>Visited To </th>
+							<th>Visit Date & Time</th>
 							<th>Action</th>
 							
 						</tr>
@@ -86,8 +87,12 @@ $(document).ready(function(){
 				name:'register_address'
 			},
 			{
-				data:'register_meet_person_name',
-				name:'register_meet_person_name'
+				data:'name',
+				name:'name'
+			},
+			{
+				data:'register_visitdate',
+				name:'register_visitdate'
 			},
 			{
 				data:'action',

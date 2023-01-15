@@ -18,6 +18,7 @@ class Register extends Model
         'register_address', 
         'register_meet_person_name', 
         'register_enter_by', 
+        'register_visitdate'
     
 ];
 }

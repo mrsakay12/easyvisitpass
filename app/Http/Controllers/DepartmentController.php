@@ -46,8 +46,9 @@ class DepartmentController extends Controller
     function add_validation(Request $request)
     {
         $request->validate([
-            'department_name'       =>  'required',
-            'contact_person'        =>  'required'
+            'department_name'       =>  'required|unique:departments',
+            'contact_person'        =>  'required',
+          
         ]);
 
         $data = $request->all();

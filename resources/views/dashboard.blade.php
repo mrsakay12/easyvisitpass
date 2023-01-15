@@ -31,9 +31,11 @@
         <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-
+      
         <div class="navbar-nav">
+       
             <div class="nav-item text-nowrap">
+            
                 <div class="nav-link px-3" href="#">Welcome, {{ Auth::user()->name }}
                     <span class="material-symbols-outlined">person</span>
                     <a class="nav-link {{ Request::segment(1) == 'profile' ? 'active' : '' }}" aria-current="page" href="/profile">Profile</a>

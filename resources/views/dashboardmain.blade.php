@@ -15,22 +15,148 @@
 	<div class="alert alert-success">
 		{{ session()->get('success') }}
 	</div>
-
 	@endif
-
+    <!-- Dashboard User -->
+    @if(Auth::user()->type == 'User')
 	<div class="row">
-        <div class="col-lg-3 col-md-6 col-sm-6 col-12">
+        <div class="col-lg-4 col-md-6 col-sm-6 col-12">
             <a href="">
                 <div class="card card-statistic-1">
-                    <div class="card-icon bg-danger">
-                        <i class="far fa-user"></i>
+                    <div class="card-icon bg-info">
+                    <span class="material-symbols-outlined"> approval_delegation</span>
                     </div>
                     <div class="card-wrap">
                         <div class="card-header">
-                            <h4>Total Employees</h4>
+                            <h4>For Approval</h4>
                         </div>
                         <div class="card-body">
-						{{$user}}
+						{{$visitorin}}
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+
+
+        <div class="col-lg-4 col-md-6 col-sm-6 col-12">
+            <a href="">
+                <div class="card card-statistic-1">
+                    <div class="card-icon bg-light">
+                    <span class="material-symbols-outlined"> nest_doorbell_visitor</span>
+                    </div>
+                    <div class="card-wrap">
+                        <div class="card-header">
+                            <h4>Total Checked-out Visitors</h4>
+                        </div>
+                        <div class="card-body">
+						{{$visitorout}}
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+		<div class="col-lg-4 col-md-6 col-sm-6 col-12">
+            <a href="">
+                <div class="card card-statistic-1">
+                    <div class="card-icon bg-body">
+                    <span class="material-symbols-outlined">app_registration</span>
+                    </div>
+                    <div class="card-wrap">
+                        <div class="card-header">
+                            <h4>Registered Visitors</h4>
+                        </div>
+                        <div class="card-body">
+                            {{$register}}
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+        <div class="table-responsive">
+				<table class="table table-bordered" id="visitor_table">
+					<thead>
+						<tr>
+						    <th>Visitor ID</th>
+							<th>First Name</th>
+							<th>Last Name</th>
+							<th>Visited To</th>
+							<th>Check-in </th>
+							<th>Check-out</th>
+							<th>Status</th>
+							@if(Auth::user()->type != 'Receptionist')
+							<th>User Action</th>
+							@endif
+							@if(Auth::user()->type != 'User')
+							<th>Reception Action</th>
+							@endif
+						</tr>
+					</thead>
+					<tbody></tbody>
+				</table>
+			</div>
+        
+
+</div>
+
+@endif
+    <!-- Dashboard User -->
+       <!-- Receptionist User -->
+
+    @if(Auth::user()->type == 'Receptionist')
+
+    <div class="row">
+        <div class="col-lg-3 col-md-6 col-sm-6 col-12">
+            <a href="">
+                <div class="card card-statistic-1">
+                <div class="card-icon bg-info">
+                    <span class="material-symbols-outlined"> approval_delegation</span>
+                    </div>
+                    <div class="card-wrap">
+                        <div class="card-header">
+                            <h4>Total Checked-In Visitors</h4>
+                        </div>
+                        <div class="card-body">
+						{{$checkin}}
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+     
+
+
+        <div class="col-lg-3 col-md-6 col-sm-6 col-12">
+            <a href="">
+                <div class="card card-statistic-1">
+            
+           <div class="card-icon bg-light">
+                    <span class="material-symbols-outlined"> nest_doorbell_visitor</span>
+                    </div>
+                    <div class="card-wrap">
+                        <div class="card-header">
+                            <h4>Total Checked-out Visitors</h4>
+                        </div>
+                        <div class="card-body">
+						{{$checkout}}
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+		<div class="col-lg-3 col-md-6 col-sm-6 col-12">
+            <a href="">
+                <div class="card card-statistic-1">
+           
+                <div class="card-icon bg-light">
+                    <span class="material-symbols-outlined"> nest_doorbell_visitor</span>
+                    </div>
+                    <div class="card-wrap">
+                        <div class="card-header">
+                            <h4>Registered Visitors</h4>
+                        </div>
+                        <div class="card-body">
+                            {{$visitor}}
                         </div>
                     </div>
                 </div>
@@ -40,8 +166,77 @@
         <div class="col-lg-3 col-md-6 col-sm-6 col-12">
             <a href="">
                 <div class="card card-statistic-1">
-                    <div class="card-icon bg-primary">
-                        <i class="fas fa-users"></i>
+    
+                <div class="card-icon bg-light">
+                    <span class="material-symbols-outlined"> pending</span>
+                    </div>
+                    <div class="card-wrap">
+                        <div class="card-header">
+                            <h4>Pending Visitors</h4>
+                        </div>
+                        <div class="card-body">
+                        {{$pending}}
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <div class="table-responsive">
+				<table class="table table-bordered" id="visitor_table2">
+					<thead>
+						<tr>
+						    <th>Visitor ID</th>
+							<th>First Name</th>
+							<th>Last Name</th>
+							<th>Visited To</th>
+							<th>Check-in </th>
+							<th>Check-out</th>
+							<th>Status</th>
+							@if(Auth::user()->type != 'Receptionist')
+							<th>User Action</th>
+							@endif
+							@if(Auth::user()->type != 'User')
+							<th>Reception Action</th>
+							@endif
+						</tr>
+					</thead>
+					<tbody></tbody>
+				</table>
+			</div>
+
+    </div>
+</div>
+@endif
+
+ <!-- Admin User -->
+ @if(Auth::user()->type == 'Admin')
+	<div class="row">
+        <div class="col-lg-4 col-md-6 col-sm-6 col-12">
+            <a href="">
+                <div class="card card-statistic-1">
+                    <div class="card-icon bg-info">
+                    <span class="material-symbols-outlined"> badge</span>
+                    </div>
+                    <div class="card-wrap">
+                        <div class="card-header">
+                            <h4>Total Employee</h4>
+                        </div>
+                        <div class="card-body">
+						{{$user}}
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+
+
+        <div class="col-lg-4 col-md-6 col-sm-6 col-12">
+            <a href="">
+                <div class="card card-statistic-1">
+                    <div class="card-icon bg-light">
+                    <span class="material-symbols-outlined"> nest_doorbell_visitor</span>
                     </div>
                     <div class="card-wrap">
                         <div class="card-header">
@@ -54,128 +249,179 @@
                 </div>
             </a>
         </div>
-		<div class="col-lg-3 col-md-6 col-sm-6 col-12">
+		<div class="col-lg-4 col-md-6 col-sm-6 col-12">
             <a href="">
                 <div class="card card-statistic-1">
-                    <div class="card-icon bg-secondary">
-                        <i class="fas fa-users"></i>
+                    <div class="card-icon bg-body">
+                    <span class="material-symbols-outlined">app_registration</span>
                     </div>
                     <div class="card-wrap">
                         <div class="card-header">
-                            <h4>Total Registered Visitors</h4>
+                            <h4>Total Pre-Registered Visitors</h4>
                         </div>
                         <div class="card-body">
-                            12
+                          {{$preregister}}
                         </div>
                     </div>
                 </div>
             </a>
         </div>
-        <div class="col-lg-3 col-md-6 col-sm-6 col-12">
-            <a href="">
-                <div class="card card-statistic-1">
-                    <div class="card-icon bg-warning">
-                        <i class="fas fa-user-secret"></i>
-                    </div>
-                    <div class="card-wrap">
-                        <div class="card-header">
-                            <h4>Total Pre Registers</h4>
-                        </div>
-                        <div class="card-body">
-                            10
-                        </div>
-                    </div>
-                </div>
-            </a>
-        </div>
-    </div>
+        
 
 </div>
- <!-- General JS Scripts -->
-<script src="https://demo.quickpass.xyz/assets/modules/jquery/dist/jquery.min.js"></script>
-<script src="https://demo.quickpass.xyz/assets/modules/popper.js/dist/popper.min.js"></script>
-<script src="https://demo.quickpass.xyz/assets/modules/bootstrap/dist/js/bootstrap.min.js"></script>
-<script src="https://demo.quickpass.xyz/assets/modules/jquery.nicescroll/dist/jquery.nicescroll.min.js"></script>
-<script src="https://demo.quickpass.xyz/assets/modules/moment/min/moment.min.js"></script>
-<script src="https://demo.quickpass.xyz/assets/js/dropzone.min.js"></script>
-<script src="https://demo.quickpass.xyz/assets/js/stisla.js"></script>
 
-<!-- JS Libraies -->
-<script src="https://demo.quickpass.xyz/assets/modules/izitoast/dist/js/iziToast.min.js"></script>
+@endif
 
-<!-- Template JS File -->
-<script src="https://demo.quickpass.xyz/assets/js/scripts.js"></script>
-<script src="https://demo.quickpass.xyz/js/custom.js"></script>
-<script src="https://www.gstatic.com/firebasejs/8.3.2/firebase.js"></script>
+<script>
 
-<script type="text/javascript">
-    var beep = document.getElementById("myAudio1");
+	
+$(document).ready(function(){
 
-    function sound() {
-        beep.play();
-    }
-    $(document).ready(function() {
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
+	var table = $('#visitor_table').DataTable({
 
-        // web_token
-        var firebaseConfig = {
-            apiKey: "AIzaSyCwsKNDXae_U6PVp28rUsyeUVLZJGd2JsQ",
-            authDomain: "visitor-app-f4cf8.firebaseapp.com",
-            projectId: "visitor-app-f4cf8",
-            storageBucket: "visitor-app-f4cf8.appspot.com",
-            messagingSenderId: "916840265010",
-            appId: "1:916840265010:web:0a79ffc97842d18924932b",
-            measurementId: "G-B6CDGMQ910"
-        };
-        firebase.initializeApp(firebaseConfig);
-        const messaging = firebase.messaging();
-        startFCM();
+		processing:true,
+		serverSide:true,
+		ajax:"{{ route('visitor.fetch_allUser') }}",
+		columns:[
+			{
+				data:'visitor_code',
+				name: 'visitor_code'
+			},
+			{
+				data: 'visitor_firstname',
+				name: 'visitor_firstname'
+			},
+			{
+				data:'visitor_lastname' ,
+				name: 'visitor_lastname'
+			},
+		
+			
+			{
+				data: 'name',
+				name: 'name'
+			},
+			
+			{
+				data:'visitor_enter_time', 
+				name: 'visitor_enter_time',
+				
+			},
+			{
+				data:'visitor_out_time',
+				name:'visitor_out_time'
+			},
+			{
+                
+				data:'visitor_status',
+				name:'visitor_status'
+			},
+			@if(Auth::user()->type != 'Receptionist')
+			{
+				data:'action',
+				name:'action',
+				orderable:false
+			}
+			,
+			@endif
+			@if(Auth::user()->type != 'User')
+			{
+				data:'arrival',
+				name:'arrival',
+				orderable:false
+			}
+			@endif
+		]
+	});
 
-        function startFCM() {
-            messaging.requestPermission()
-                .then(function() {
-                    return messaging.getToken()
-                })
-                .then(function(response) {
-                    $.ajax({
-                        url: 'https://demo.quickpass.xyz/admin/store-token',
-                        type: 'POST',
-                        data: {
-                            token: response
-                        },
-                        dataType: 'JSON',
-                        success: function(response) {
+    
 
-                        },
-                        error: function(error) {
+	$(document).on('click', '.delete', function(){
 
-                        },
-                    });
-                }).catch(function(error) {
+var id = $(this).data('id');
 
-                });
-        }
-        messaging.onMessage(function(payload) {
-            const title = payload.notification.title;
-            const options = {
-                body: payload.notification.body,
-                icon: payload.notification.icon,
-            };
+if(confirm("Are you sure you want to remove it?"))
+{
+	window.location.href = "/visitor/delete/" + id;
+}
 
-            sound();
-            window.location.reload();
-            new Notification(title, options);
-        });
+});
 
+});
+
+$(document).ready(function(){
+
+var table = $('#visitor_table2').DataTable({
+
+    processing:true,
+    serverSide:true,
+    ajax:"{{ route('visitor.fetch_allrecep') }}",
+    columns:[
+        {
+            data:'visitor_code',
+            name: 'visitor_code'
+        },
+        {
+            data: 'visitor_firstname',
+            name: 'visitor_firstname'
+        },
+        {
+            data:'visitor_lastname' ,
+            name: 'visitor_lastname'
+        },
+    
         
-            });
-</script>
-    </body>
+        {
+            data: 'name',
+            name: 'name'
+        },
+        
+        {
+            data:'visitor_enter_time', 
+            name: 'visitor_enter_time',
+            
+        },
+        {
+            data:'visitor_out_time',
+            name:'visitor_out_time'
+        },
+        {
+            
+            data:'visitor_status',
+            name:'visitor_status'
+        },
+        @if(Auth::user()->type != 'Receptionist')
+        {
+            data:'action',
+            name:'action',
+            orderable:false
+        }
+        ,
+        @endif
+        @if(Auth::user()->type != 'User')
+        {
+            data:'arrival',
+            name:'arrival',
+            orderable:false
+        }
+        @endif
+    ]
+});
 
-</html>
+
+
+$(document).on('click', '.delete', function(){
+
+var id = $(this).data('id');
+
+if(confirm("Are you sure you want to remove it?"))
+{
+window.location.href = "/visitor/delete/" + id;
+}
+
+});
+
+});
+</script>
 
 @endsection

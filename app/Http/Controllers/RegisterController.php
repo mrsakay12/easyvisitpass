@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Models\User;
 use Illuminate\Http\Request;
 use App\Models\Visitor;
 use App\Models\Register;
@@ -22,11 +23,19 @@ class RegisterController extends Controller
     {
         if($request->ajax())
         {
-            $data = Register::latest()->get();
+            $query = Register::join('users', 'users.id', '=', 'register_meet_person_name');
+
+
+            if(Auth::user()->type == 'User')
+            {
+                $query->where('register_meet_person_name', '=', Auth::user()->id);
+            }
+
+            $data = $query ->get(['registers.register_firstname', 'registers.register_lastname', 'registers.register_email', 'registers.register_mobile_no', 'registers.register_gender', 'registers.register_address', 'registers.register_visitdate', 'registers.register_meet_person_name', 'users.name', 'registers.id']);
             return DataTables::of($data)
                 ->addIndexColumn()
                 ->addColumn('action', function($row){
-                    return '<a href="/department/edit/'.$row->id.'" class="btn btn-primary btn-sm">Edit</a>&nbsp;<button type="button" class="btn btn-danger btn-sm delete" data-id="'.$row->id.'">Delete</button>';
+                    return '<a href="/register/edit/'.$row->id.'" class="btn btn-primary btn-sm">Edit</a>&nbsp;<button type="button" class="btn btn-danger btn-sm delete" data-id="'.$row->id.'">Delete</button>';
                 })
                 ->rawColumns(['action'])
                 ->make(true);
@@ -34,16 +43,25 @@ class RegisterController extends Controller
     }
     function add()
     {
-        return view('add_register');
+        $user['data'] = User::orderby("name","asc")->where('type', '=', 'User')->where('status', '=', 'Active')
+        ->select('id','name')
+        ->get();
+        return view('add_register')->with("user",$user);
+      
     }
 
     function add_validation(Request $request)
     {
         $request->validate([
 
-            'visitor_purpose'      =>  'required',
-            'visitor_firstname'      =>  'required',
-            'visitor_lastname'      =>  'required',
+         
+            'register_firstname'      =>  'required',
+            'register_lastname'       =>  'required',
+            'register_email'          =>  'required|email|unique:registers',
+            'register_mobile_no'      =>  'required',
+            'register_gender'         =>  'required',
+            'register_address'        =>  'required',
+            'register_visitdate'      =>  'required',
             
         ]);
 
@@ -51,22 +69,19 @@ class RegisterController extends Controller
 
 
         Register::create([
-            'visitor_code'           =>  $data['visitor_code'],
-            'visitor_firstname'      =>  $data['visitor_firstname'],
-            'visitor_lastname'       =>  $data['visitor_lastname'],
-            'visitor_email'          =>  $data['visitor_email'],
-            'visitor_mobile_no'      =>  $data['visitor_mobile_no'],
-            'visitor_gender'         =>  $data['visitor_gender'],
-            'visitor_address'        =>  $data['visitor_address'],
-            'visitor_id'             =>  $data['visitor_id'],
-            'visitor_meet_person_name'  =>  $data['visitor_meet_person_name'],
-            'visitor_purpose'        =>  $data['visitor_purpose'],
-            'visitor_status'        =>  $data['visitor_status'],
-            'visitor_enter_by'       =>   Auth::user()->id,
+            'register_firstname'           =>  $data['register_firstname'],
+            'register_lastname'            =>  $data['register_lastname'],
+            'register_email'               =>  $data['register_email'],
+            'register_mobile_no'           =>  $data['register_mobile_no'],
+            'register_gender'              =>  $data['register_gender'],
+            'register_meet_person_name'    =>  $data['register_meet_person_name'],
+            'register_address'             =>  $data['register_address'],
+            'register_visitdate'           =>  $data['register_visitdate'],
+            'register_enter_by'            =>   Auth::user()->id,
           
         ]);
 
-        return redirect('register')->with('success', 'New Visitors Added');
+        return redirect('register')->with('success', 'New Pre- Register Visitor Added');
     }
 
     function delete($id)
@@ -75,10 +90,52 @@ class RegisterController extends Controller
 
         $data->delete();
 
-        return redirect('register')->with('success', 'Visitor Removed');
+        return redirect('register')->with('success', 'Pre- Register Visitor Removed');
     }
 
+    public function edit($id)
+    {
+        $user['data'] = User::orderby("name","asc")->where('type', '=', 'User')->where('status', '=', 'Active')
+        ->select('id','name')
+        ->get();
+        $data = Register::findOrFail($id);
+        return view('edit_register', compact('data'))->with("user",$user);
+
+    }
+
+    function edit_validation(Request $request)
+    {
+        $request->validate([
+           
+            'register_firstname'      =>  'required',
+            'register_lastname'       =>  'required',
+            'register_mobile_no'      =>  'required',
+            'register_gender'         =>  'required',
+            'register_address'        =>  'required',
+            'register_visitdate'      =>  'required',
+        ]);
+
+        $data = $request->all();
+
+        $form_data = array(
+            'register_firstname'           =>  $data['register_firstname'],
+            'register_lastname'            =>  $data['register_lastname'],
+            'register_email'               =>  $data['register_email'],
+            'register_mobile_no'           =>  $data['register_mobile_no'],
+            'register_gender'              =>  $data['register_gender'],
+            'register_meet_person_name'    =>  $data['register_meet_person_name'],
+            'register_address'             =>  $data['register_address'],
+            'register_visitdate'           =>  $data['register_visitdate'],
+            'register_enter_by'            =>   Auth::user()->id,
+          
+        );
+
+        Register::whereId($data['hidden_id'])->update($form_data);
+
+        return redirect('register')->with('success', 'Pre-Register Data Updated');
+    }
    
+    
     
 
 

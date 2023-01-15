@@ -37,9 +37,7 @@
 						    <th>Visitor ID</th>
 							<th>First Name</th>
 							<th>Last Name</th>
-							<th>Presented ID No.</th>
 							<th>Visited To</th>
-							<th>Purpose</th>
 							<th>Check-in </th>
 							<th>Check-out</th>
 							<th>Status</th>
@@ -81,18 +79,12 @@ $(document).ready(function(){
 				name: 'visitor_lastname'
 			},
 		
-			{
-				data:'visitor_id',
-				name: 'visitor_id'
-			},
+			
 			{
 				data: 'name',
 				name: 'name'
 			},
-			{
-				data:'visitor_purpose',
-				name:'visitor_purpose'
-			},
+			
 			{
 				data:'visitor_enter_time', 
 				name: 'visitor_enter_time',

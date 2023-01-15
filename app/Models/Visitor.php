@@ -24,10 +24,20 @@ class Visitor extends Model
                 'visitor_enter_by',
                 'visitor_status',
                 'visit_time',
+                'visitor_image',
+                
                 
     ];
 
     public function userid(){
         return $this->belongsTo('App\Models\User','user_id')->withDefault();
     }
+
+    public function user()
+    {
+  
+    return $this->hasMany(Visitor::class);
+    }
 }
+
+

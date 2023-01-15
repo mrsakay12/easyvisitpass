@@ -35,7 +35,12 @@ Route::get('preregister', [CustomAuthController::class, 'preregister'])->name('p
 Route::get('return', [CustomAuthController::class, 'return'])->name('return');
 Route::post('checkin/checkin_validation', [CustomAuthController::class, 'checkin_validation'])->name('checkin_validation');
 
-Route::post('visitor/add_validation', [VisitorController::class, 'add_validation'])->name('visitor.add_validation');
+Route::get('search', [CustomAuthController::class, 'search'])->name('search');
+Route::get('checkin_reg', [CustomAuthController::class, 'checkin_reg'])->name('checkin_reg');
+
+
+
+
 
 
 
@@ -48,6 +53,7 @@ Route::get('login', [CustomAuthController::class, 'index'])->name('login');
 Route::post('custom-login', [CustomAuthController::class, 'custom_login'])->name('login.custom');
 
 Route::get('dashboard', [CustomAuthController::class, 'dashboard'])->name('dashboard');
+Route::get('dashboard2', [CustomAuthController::class, 'dashboard2'])->name('dashboard2');
 
 Route::redirect('/', '/home')->name('home');
 
@@ -110,11 +116,23 @@ Route::get('department/delete/{id}', [DepartmentController::class, 'delete'])->n
 
 Route::get('visitor', [VisitorController::class, 'index'])->name('visitor');
 Route::get('visitor/fetchall', [VisitorController::class, 'fetch_all'])->name('visitor.fetchall');
+Route::get('visitor/fetch_allUser', [VisitorController::class, 'fetch_allUser'])->name('visitor.fetch_allUser');
+Route::get('visitor/fetch_allrecep', [VisitorController::class, 'fetch_allrecep'])->name('visitor.fetch_allrecep');
+
+
+
 Route::get('visitor/add', [VisitorController::class, 'add'])->name('visitor.add');
 Route::post('visitor/add_validation', [VisitorController::class, 'add_validation'])->name('visitor.add_validation');
-Route::get('visitor/edit/{id}', [VisitorController::class, 'edit'])->name('edit');
+
 Route::post('visitor/edit_validation', [VisitorController::class, 'edit_validation'])->name('visitor.edit_validation');
 Route::get('visitor/delete/{id}', [VisitorController::class, 'delete'])->name('delete');
+
+
+
+
+Route::get('visitorimage', [VisitorController::class, 'visitorimage'])->name('visitorimage');
+Route::get('visitor/edit/{id}', [VisitorController::class, 'edit'])->name('edit');
+
 
 
 
@@ -150,5 +168,7 @@ Route::post('register/add_validation', [RegisterController::class, 'add_validati
 Route::get('register/edit/{id}', [RegisterController::class, 'edit'])->name('edit');
 Route::post('register/edit_validation', [RegisterController::class, 'edit_validation'])->name('register.edit_validation');
 Route::get('register/delete/{id}', [RegisterController::class, 'delete'])->name('delete');
+
+
 
 

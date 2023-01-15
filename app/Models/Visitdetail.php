@@ -21,4 +21,6 @@ class Visitdetail extends Model
         'visit_time' 
 ];
 
+
+
 }

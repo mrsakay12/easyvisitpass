@@ -9,6 +9,8 @@ use Hash;
 use Session;
 use App\Models\Visitor;
 use App\Models\Visitdetail;
+use App\Models\Register;
+use Haruncpi\LaravelIdGenerator\IdGenerator;
 
 class CustomAuthController extends Controller
 {
@@ -63,13 +65,49 @@ class CustomAuthController extends Controller
     {
         if(Auth::check())
         {
+           
+            $visitorin = Visitor::where('visitor_status', '=', 'Lobby')->where('visitor_meet_person_name', '=', Auth::user()->id)->count();
+            $visitorout = Visitor::where('visitor_status', '=', 'Out')->where('visitor_meet_person_name', '=', Auth::user()->id)->count();
+            $register = Visitor::where('visitor_meet_person_name', '=', Auth::user()->id)->count();
+            $checkin = Visitor::where('visitor_status', '=', 'In')->count();
+            $checkout = Visitor::where('visitor_status', '=', 'Out')->count();
+            $pending = Visitor::where('visitor_status', '=', 'Pending')->count();
+          
+
+            //Admin
             $user = User::where('type', '=', 'User')->where('status', '=', 'Active')->count();
             $visitor = Visitor::count();
-            return view('dashboardmain')->with("user", $user)->with("visitor", $visitor);
+            $preregister = Register::count();
+         
+          
+            
+            return view('dashboardmain')->with("user", $user)->with("visitor", $visitor)->with("visitorin", $visitorin)
+            ->with("visitorout", $visitorout)->with("register", $register)->with("checkin", $checkin)
+            ->with("checkout", $checkout)->with("pending", $pending)->with("preregister", $preregister);
         }
 
         return redirect('login');
     }
+
+    public function dashboard2()
+    {
+        if(Auth::check())
+        {
+           
+            $visitorin = Visitor::where('visitor_status', '=', 'Lobby')->where('visitor_meet_person_name', '=', Auth::user()->id)->count();
+            $visitorout = Visitor::where('visitor_status', '=', 'Out')->where('visitor_meet_person_name', '=', Auth::user()->id)->count();
+            $register = Visitor::where('visitor_meet_person_name', '=', Auth::user()->id)->count();
+
+            $user = User::where('type', '=', 'User')->where('status', '=', 'Active')->count();
+            $visitor = Visitor::count();
+            
+            return view('dashboard')->with("user", $user)->with("visitor", $visitor)->with("visitorin", $visitorin)
+            ->with("visitorout", $visitorout)->with("register", $register);
+        }
+
+        return redirect('login');
+    }
+
 
      public function home(){
    
@@ -77,6 +115,8 @@ class CustomAuthController extends Controller
         
         }
 
+        
+    
     public function logout()
     {
         Session::flush();
@@ -91,6 +131,8 @@ class CustomAuthController extends Controller
         ->select('id','name')
         ->get();
         
+     
+        //output: INV-000001
         return view('frontend/checkin')->with("user",$user);
     }
 
@@ -133,9 +175,10 @@ class CustomAuthController extends Controller
 
         $data = $request->all();
 
-      
+        $visitor_code= IdGenerator::generate(['table' => 'visitors', 'field' => 'visitor_code', 'length' => 12, 'prefix' =>'EVPASS-']);
+
         $visitor = Visitor::create([
-            'visitor_code'           =>  $data['visitor_code'],
+            'visitor_code'           =>   $visitor_code,
             'visitor_firstname'      =>  $data['visitor_firstname'],
             'visitor_lastname'       =>  $data['visitor_lastname'],
             'visitor_email'          =>  $data['visitor_email'],
@@ -150,7 +193,7 @@ class CustomAuthController extends Controller
             'visit_time'             =>    $data['visit_time'],
           
         ]);
-
+       
         Visitdetail::create([
             'visitor_firstname'      =>  $data['visitor_firstname'],
             'visitor_lastname'       =>  $data['visitor_lastname'],
@@ -166,5 +209,28 @@ class CustomAuthController extends Controller
         return redirect('checkin-id')->with(['success'=>'','data'=>$visitor]) ;
     }
 
+    function search(Request $request)
+    {
+        $request->validate([
+            'query' => 'exists:registers,register_email',
+        ],[
+            'query.exists' => '   Pre-Register not found!',
+        ]
+        );
+
+        $search_text = $_GET['query'];
+        $register = Register::where('register_email', 'LIKE', '%' . $search_text . '%')->get();
+        $user['data'] = User::orderby("name","asc")->where('type', '=', 'User')->where('status', '=', 'Active')
+        ->select('id','name')
+        ->get();
+       
+        return view('frontend/checkin_register',compact('register'))->with("user",$user)->with("register",$register);
+    }
+
+    function checkin_register()
+    {
+
+        return view('frontend/checkin_register');
+    }
    
 }
