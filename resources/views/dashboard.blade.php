@@ -32,11 +32,25 @@
             <span class="navbar-toggler-icon"></span>
         </button>
 
-        <div class="navbar-nav">
-            <div class="nav-item text-nowrap">
+        <div class="right">    
+            <div class="top">
                 <div class="nav-link px-3" href="#">Welcome, {{ Auth::user()->name }}
-                    <span class="material-symbols-outlined">person</span>
-                    <a class="nav-link {{ Request::segment(1) == 'profile' ? 'active' : '' }}" aria-current="page" href="/profile">Profile</a>
+                <div class="dropdown">
+                    <button class="dropbtn"> 
+                        <span class="material-symbols-outlined">person</span>
+                    </button>
+
+                    <div class="dropdown-content">
+                        <div class="profile">
+                            <span class="material-symbols-outlined">badge</span>
+                            <a class="nav-link {{ Request::segment(1) == 'profile' ? 'active' : '' }}" aria-current="page" href="/profile">Profile</a>
+                        </div>
+                        <div class="logout">
+                            <span class="material-symbols-outlined">logout</span>
+                            <a class="nav-link" href="{{ route('logout') }}">Logout</a>
+                        </div>
+                    </div>
+                </div>
                 </div>
             </div>
         </div>      
@@ -52,28 +66,33 @@
                             <span class="material-symbols-outlined"> grid_view</span>
                             <a class="nav-link {{ Request::segment(1) == 'dashboard' ? 'active' : '' }}" aria-current="page" href="/dashboard">Dashboard</a>
                         </li>
-                        
-                        @if(Auth::user()->type != 'User')
 
-                        <li class="nav-item">
-                            <span class="material-symbols-outlined">room_preferences</span>
-                            <a class="nav-link {{ Request::segment(1) == 'department' ? 'active' : '' }}" aria-current="page" href="/department">Departments</a>
-                        </li>
+                        @if(Auth::user()->type != 'User')
+                        <div class="dropdown-emp">
+                            <button class="dropbtn-emp">
+                            <li class="nav-item">
+                                <span class="material-symbols-outlined">badge</span>
+                                <a class="nav-link {{ Request::segment(1) == 'sub_user' ? 'active' : '' }}" aria-current="page" href="/sub_user">Employees</a>    
+                            </li>
+                            </button>
                             
+                        @endif
+                        @if(Auth::user()->type != 'User')
+                        <div class="dropdown-content-emp">
+                            <li class="nav-item">
+                                <span class="material-symbols-outlined">room_preferences</span>
+                                <a class="nav-link {{ Request::segment(1) == 'department' ? 'active' : '' }}" aria-current="page" href="/department">Departments</a>
+                            </li>
+
                         @endif
                         @if(Auth::user()->type == 'Admin')
-                        <li class="nav-item">
-                            <span class="material-symbols-outlined">subtitles</span>
-                            <a class="nav-link {{ Request::segment(1) == 'designation' ? 'active' : '' }}" aria-current="page" href="/designation">Designations</a>
-                        </li>
-                            
-                        @endif
-                        @if(Auth::user()->type != 'User')
-                        <li class="nav-item">
-                            <span class="material-symbols-outlined">badge</span>
-                            <a class="nav-link {{ Request::segment(1) == 'sub_user' ? 'active' : '' }}" aria-current="page" href="/sub_user">Employees</a>    
-                        </li>
-                        
+                            <li class="nav-item">
+                                <span class="material-symbols-outlined">subtitles</span>
+                                <a class="nav-link {{ Request::segment(1) == 'designation' ? 'active' : '' }}" aria-current="page" href="/designation">Designations</a>
+                            </li>
+                        </div>
+                        </div>
+
                         @endif           
                         <li class="nav-item">
                             <span class="material-symbols-outlined">nest_doorbell_visitor</span>
@@ -83,12 +102,8 @@
                             <span class="material-symbols-outlined">how_to_reg</span>
                             <a class="nav-link {{ Request::segment(1) == 'register' ? 'active' : '' }}" href="/register">Pre-Registers</a>
                         </li>
-                        <li class="nav-item">
-                            <span class="material-symbols-outlined">logout</span>
-                            <a class="nav-link" href="{{ route('logout') }}">Logout</a>
-                        </li>
+                        
                     </ul>
-
                 </div>
             </nav>
             <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">

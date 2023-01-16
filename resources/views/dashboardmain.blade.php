@@ -18,11 +18,25 @@
 
 	@endif
 
+    <div class="date-time">
+    <p class="ridge">
+        <span class="material-symbols-outlined">calendar_month</span>
+        <span id='date'></span>
+    </p>
+    </div>
+    
+    <script>
+        var dt = new Date();
+        document.getElementById('date').innerHTML= new Date().toString();
+    </script>
+
+    <div class="container">
 	<div class="row">
-        <div class="col-lg-3 col-md-6 col-sm-6 col-12">
+        <div class="employees">
             <a href="">
                 <div class="card card-statistic-1">
                     <div class="card-icon bg-danger">
+                        <span class="material-symbols-outlined">badge</span>
                         <i class="far fa-user"></i>
                     </div>
                     <div class="card-wrap">
@@ -30,17 +44,17 @@
                             <h4>Total Employees</h4>
                         </div>
                         <div class="card-body">
-						{{$user}}
+                            {{$user}}
                         </div>
                     </div>
                 </div>
             </a>
         </div>
-
-        <div class="col-lg-3 col-md-6 col-sm-6 col-12">
+        <div class="visitors">
             <a href="">
                 <div class="card card-statistic-1">
                     <div class="card-icon bg-primary">
+                        <span class="material-symbols-outlined">nest_doorbell_visitor</span>
                         <i class="fas fa-users"></i>
                     </div>
                     <div class="card-wrap">
@@ -48,16 +62,17 @@
                             <h4>Total Visitors</h4>
                         </div>
                         <div class="card-body">
-						{{$visitor}}
+						    {{$visitor}}
                         </div>
                     </div>
                 </div>
             </a>
         </div>
-		<div class="col-lg-3 col-md-6 col-sm-6 col-12">
+		<div class="registered">
             <a href="">
                 <div class="card card-statistic-1">
                     <div class="card-icon bg-secondary">
+                        <span class="material-symbols-outlined">groups</span>
                         <i class="fas fa-users"></i>
                     </div>
                     <div class="card-wrap">
@@ -71,10 +86,11 @@
                 </div>
             </a>
         </div>
-        <div class="col-lg-3 col-md-6 col-sm-6 col-12">
+        <div class="pre-register">
             <a href="">
                 <div class="card card-statistic-1">
                     <div class="card-icon bg-warning">
+                        <span class="material-symbols-outlined">how_to_reg</span>
                         <i class="fas fa-user-secret"></i>
                     </div>
                     <div class="card-wrap">
@@ -88,6 +104,7 @@
                 </div>
             </a>
         </div>
+    </div>
     </div>
 
 </div>
