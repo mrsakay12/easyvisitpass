@@ -27,7 +27,7 @@
     <!-- Navbar Section -->
     <nav class="navbar navbar-expand-lg bg-white">
       <div class="container">
-        <a class="navbar-brand" href="\home">
+        <a class="navbar-brand" href="\evpass-cdo">
           <img
             src="{{ asset('/Images/logo3.png') }}"
             alt="logo"
@@ -66,7 +66,10 @@
 
     <!-- HERO SECTION -->
     @yield('content')
-
+    <hr class="hr-line">
+            <div class="d-flex justify-content-center footer-text pb-3">
+                <span> @ 2023 All Rights Reserved</span>
+            </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
   </body>

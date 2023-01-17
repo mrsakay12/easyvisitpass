@@ -76,10 +76,10 @@
                     <div class="col-md-6">
 					<label><b>Gender</b></label>
 		        		
-						<select class="form-control"  name="gender" aria-label="Default select example" value="{{ $data2->gender}}" >
+						<select class="form-control"  name="gender" aria-label="Default select example" optionvalue="{{ $data2->gender}}" >
 								<option >-- Select Gender --</option>
-								<option value="Male">Male</option>
-								<option value="Female">Female</option>
+								<option value="Male" {{$data2->gender == "Male" ? "selected" : ""}}>Male</option>
+								<option value="Female" {{$data2->gender == "Female" ? "selected" : ""}}>Female</option>
 						</select>
                     </div>
                 </div>
@@ -111,18 +111,18 @@
                 <div class="form-group mb-3 row">
 				<div class="form-group mb-3">
 		        		<label><b>Department</b></label>
-					<select id='department_id' name='department_id' class="form-control" >
+					<select id='department_id' name='department_id' class="form-control"  >
 								<option value='0'>-- Select department --</option>
 								<!-- Read Departments -->
 								@foreach($departments['data'] as $department)
-									<option value='{{ $department->id }}'>{{ $department->department_name }}</option>
+									<option  value='{{ $department->id }}'  {{$data2->department_id ==  $department->id ? "selected" : ""}} >{{ $department->department_name }}</option>
 								@endforeach
 							</select>
 					</div>
 					<div class="form-group mb-3">
 		        		<label><b>Designation</b></label>
 					<select id='designation_id' name='designation_id' class="form-control" >
-								<option value='0'>-- Select designation --</option>
+								<option value='0' >-- Select designation --</option>
 							</select>
 							</div>
                 </div>
@@ -168,7 +168,7 @@
                    var id = response['data'][i].id;
                    var name = response['data'][i].designation_name;
 
-                   var option = "<option value='"+id+"'>"+name+"</option>";
+                   var option = "<option value='"+id+"' {{$data2->designation_id == "+id+" ? "selected" : ""}}  >"+name+"</option>";
 
                    $("#designation_id").append(option); 
                 }

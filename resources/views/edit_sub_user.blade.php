@@ -33,12 +33,12 @@
 		        		@endif
 		        	</div>
 					<div class="form-group mb-3">
-		        	<label><b>Role</b></label>
+		        	<label><b>Role</b></label>	
 		        		
 						<select class="form-control"  name="type" aria-label="Default select example" >
-						           <option value="User">User</option>
-								<option value="Receptionist">Receptionist</option>
-								<option value="Admin">Admin</option>
+						           <option value="User" {{$data->type == "User" ? "selected" : ""}} >User</option>
+								<option value="Receptionist" {{$data->type == "Receptionist" ? "selected" : ""}} >Receptionist</option>
+								<option value="Admin" {{$data->type == "Admin" ? "selected" : ""}} >Admin</option>
 						</select>
 					</div>
 					
@@ -46,8 +46,8 @@
 					<label><b>Status</b></label>
 		        	
 						<select class="form-control"  name="status" aria-label="Default select example" >
-								<option value="Active">Active</option>
-								<option value="De-Active">De-Active</option>
+								<option value="Active"  {{$data->status == "Active" ? "selected" : ""}} >Active</option>
+								<option value="De-Active"  {{$data->status == "De-Active" ? "selected" : ""}} >De-Active</option>
 						</select>
 					</div>
 

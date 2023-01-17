@@ -17,7 +17,8 @@ class AddNewFieldsToUsersTable extends Migration
             //
             $table->enum('type', ['Admin', 'User','Receptionist']);
             $table->enum('status', ['Active', 'De-Active']);
-            $table->enum('profile', ['New', 'With Profile']);
+            $table->string('comp_name', 255);
+            $table->string('comp_add', 255);
         });
     }
 

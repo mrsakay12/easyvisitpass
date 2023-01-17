@@ -5,7 +5,7 @@
     <!-- HERO SECTION -->
  
     <section class="hero">
-    <form method="POST" action="{{ route('checkin_validation') }}">
+    <form method="POST" action="{{ route('return_validation') }}">
     @csrf
       <div class="container">
         <div class="row">
@@ -13,6 +13,7 @@
             <div class="copy">
               <div class="text-label-h4">
                 <h4>Visitor Details</h4>
+                @foreach($return as $return)
               </div>
             </div>
             <input type="hidden" name="visitor_code" class="form-control" placeholder="" value="EVPASS0001" />
@@ -28,7 +29,8 @@
                     placeholder="First name"
                     aria-label="First name"
                     name="visitor_firstname"
-                  />
+                    value="{{$return->visitor_firstname}}"
+                    />
                   @if($errors->has('visitor_firstname'))
 		        			<span class="text-danger">{{ $errors->first('visitor_firstname') }}</span>
 		        		@endif
@@ -44,14 +46,15 @@
                     placeholder="Last name"
                     aria-label="Last name"
                     name="visitor_lastname"
-                  />
+                    value="{{$return->visitor_lastname}}"
+                    />
                   @if($errors->has('visitor_lastname'))
 		        			<span class="text-danger">{{ $errors->first('visitor_lastname') }}</span>
 		        		@endif
                 </div>
               </div>
               <div class="row">
-                <div class="col">
+              <div class="col">
                   <label for="inputEmail4" class="form-label"
                     >Select Employee<span class="text-danger">*</span></label>
 
@@ -78,6 +81,7 @@
                     name="visitor_mobile_no"
                     id="visitor_mobile_no"
                     class="form-control input-css"
+                    value="{{$return->visitor_mobile_no}}"
                 
                   />
                   @if($errors->has('visitor_mobile_no'))
@@ -88,9 +92,9 @@
               <div class="row">
                 <div class="col">
                   <label for="inputEmail4" class="form-label"
-                    >Email</label
+                    >Email<span class="text-danger">*</span></label
                   >
-                  <input type="email" class="form-control" id="inputEmail4"  name="visitor_email"      placeholder="Email Address"/>
+                  <input type="email" class="form-control" id="inputEmail4"  name="visitor_email"      placeholder="Email Address"    value="{{$return->visitor_email}}" />
                   @if($errors->has('visitor_email'))
 		        			<span class="text-danger">{{ $errors->first('visitor_email') }}</span>
 		        		@endif
@@ -99,13 +103,8 @@
                   <label for="inputEmail4" class="form-label"
                     >Gender<span class="text-danger">*</span></label
                   >
-                  <select
-                    class="form-select"
-                    name="visitor_gender"
-                    aria-label="Default select example"
-                  >
-                    <option value="Male" selected>Male</option>
-                    <option value="Female">Female</option>
+                
+                  <input type="text" class="form-control" id="inputEmail4"  name="visitor_gender"      placeholder="Email Address"      value="{{$return->visitor_gender}}" />
                   </select>
                   @if($errors->has('visitor_gender'))
 		        			<span class="text-danger">{{ $errors->first('visitor_gender') }}</span>
@@ -140,14 +139,15 @@
                 <div class="col">
                   <div class="mb-3">
                     <label for="exampleFormControlTextarea1" class="form-label"
-                      >Address</label
+                      >Address<span class="text-danger">*</span></label
                     >
-                    <textarea
+                    <input type="text"
                       class="form-control"
                       id="exampleFormControlTextarea1"
                       rows="3"
                       name="visitor_address"
-                    ></textarea>
+                      value="{{$return->visitor_address}}"
+                    />
                     @if($errors->has('visitor_address'))
 		        			<span class="text-danger">{{ $errors->first('visitor_address') }}</span>
 		        		@endif
@@ -172,15 +172,16 @@
                 </div>
               </div>
               <div class="cta">
-                <a href="\evpass-cdo" class="btn btn-cancel-red shadow-none">Cancel</a>
+                <a href="\preregister" class="btn btn-cancel-red shadow-none">Back</a>
                <input class="btn btn-primary shadow-none float-lg-end"  type="submit"  value="Continue" />
 		        	
 		        
               </div>
            
           </div>
+          @endforeach
           <div class="col-md-6">
-            <img src="{{ asset('/Images/chekin.png') }}"  class="w-100" alt="" />
+            <img src="{{ asset('/Images/chekin.png') }}"class="w-100" alt="" />
           </div>
         </div>
       </div>

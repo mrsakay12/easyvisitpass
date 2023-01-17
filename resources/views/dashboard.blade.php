@@ -1,4 +1,4 @@
-    <!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
     <title>Easy Visit Pass</title>
@@ -10,7 +10,7 @@
 
     @guest
 
-    <h1 class="mt-4 mb-5 text-center">Easy Visit Pass</h1>
+   
 
     @yield('content')
 
@@ -27,22 +27,41 @@
     <script src="{{asset('js/dataTables.bootstrap5.min.js')}}"></script>
 
     <header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">  
-        <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3" href="#">Easy Visit Pass</a>
+        <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3" href="\dashboard"> {{ Auth::user()->comp_name }} </a>
         <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-      
-        <div class="navbar-nav">
-       
-            <div class="nav-item text-nowrap">
+
+        <div class="right">    
             
-                <div class="nav-link px-3" href="#">Welcome, {{ Auth::user()->name }}
-                    <span class="material-symbols-outlined">person</span>
-                    <a class="nav-link {{ Request::segment(1) == 'profile' ? 'active' : '' }}" aria-current="page" href="/profile">Profile</a>
+            <div class="top">
+                
+            
+                
+
+            
+                <div class="nav-link px-3" href="#"> Welcome, {{ Auth::user()->name }} 
+                <div class="dropdown">
+                    <button class="dropbtn"> 
+                        <span class="material-symbols-outlined">person</span>
+                    </button>
+
+                    <div class="dropdown-content">
+                        <div class="profile">
+                            <span class="material-symbols-outlined">badge</span>
+                            <a class="nav-link {{ Request::segment(1) == 'profile' ? 'active' : '' }}" aria-current="page" href="/profile">Profile</a>
+                        </div>
+                        <div class="logout">
+                            <span class="material-symbols-outlined">logout</span>
+                            <a class="nav-link" href="{{ route('logout') }}">Logout</a>
+                        </div>
+                    </div>
+                </div>
                 </div>
             </div>
         </div>      
     </header>
+
 
     <aside>
     <div class="container-fluid">
@@ -54,7 +73,12 @@
                             <span class="material-symbols-outlined"> grid_view</span>
                             <a class="nav-link {{ Request::segment(1) == 'dashboard' ? 'active' : '' }}" aria-current="page" href="/dashboard">Dashboard</a>
                         </li>
-                        
+                        @if(Auth::user()->type == 'Admin')
+                        <li class="nav-item">
+                            <span class="material-symbols-outlined">add_business</span>
+                            <a class="nav-link {{ Request::segment(1) == 'company' ? 'active' : '' }}" aria-current="page" href="/company">Company</a>
+                        </li>
+                        @endif
                         @if(Auth::user()->type != 'User')
 
                         <li class="nav-item">
@@ -85,10 +109,7 @@
                             <span class="material-symbols-outlined">how_to_reg</span>
                             <a class="nav-link {{ Request::segment(1) == 'register' ? 'active' : '' }}" href="/register">Pre-Registers</a>
                         </li>
-                        <li class="nav-item">
-                            <span class="material-symbols-outlined">logout</span>
-                            <a class="nav-link" href="{{ route('logout') }}">Logout</a>
-                        </li>
+                        
                     </ul>
 
                 </div>

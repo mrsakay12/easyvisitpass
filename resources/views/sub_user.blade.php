@@ -31,8 +31,8 @@
 				<table class="table table-bordered" id="user_table">
 					<thead>
 						<tr>
-							<th>User ID</th>
-							<th>User Email</th>
+							<th>Full Name</th>
+							<th> Email Address</th>
 							<th>Role</th>
 							<th>Status</th>
 							@if(Auth::user()->type == 'Admin')

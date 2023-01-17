@@ -28,7 +28,13 @@ class ProfileController extends Controller
     }
 
     
-
+    function company()
+    {
+        $data = User::findOrFail(Auth::user()->id);
+       
+        return view('company', compact('data'));
+      
+    }
 
     function edit_validation(Request $request)
     {
@@ -59,6 +65,32 @@ class ProfileController extends Controller
         User::whereId(Auth::user()->id)->update($form_data);
 
         return redirect('profile')->with('success', 'Profile Data Updated');
+        
+    }
+    
+
+
+    function company_validation(Request $request)
+    {
+        $request->validate([
+            'comp_name'     =>  'required',
+            'comp_add'      =>  'required'
+        ]);
+
+        $data = $request->all();
+ 
+
+       
+            $form_data = array(
+                'comp_name'     =>  $data['comp_name'],
+                'comp_add'     =>  $data['comp_add'],
+               
+            );
+        
+
+        User::whereId(Auth::user()->id)->update($form_data);
+
+        return redirect('company')->with('success', 'Company Data Updated');
         
     }
    

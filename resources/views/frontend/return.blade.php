@@ -13,26 +13,20 @@
                 <h4>Return Visitor Details</h4>
               </div>
             </div>
+            <form class="form-control" type="get" action="{{ url('/search2') }}">
             <div class="form-group">
               <label for="email" class="control-label heading mb-1"
-                >Visitor's Email<span class="text-danger"
+                >Visitor's Email Address<span class="text-danger"
                   >*</span
-                ></label
-              >
-              <input
-                class="form-control input mb-4"
-                id="email"
-                placeholder="Search email ..."
-                name="email"
-                type="text"
-                required
-              />
+                ></label>
+                @if($errors->has('query'))
+		        			<span class="text-danger">{{ $errors->first('query') }}</span>
+		        		@endif
+              <input class="form-control input mb-4" placeholder="Search email address.." name="query" type="text" />
             </div>
             <div class="cta">
-              <a  href="\home" class="btn btn-cancel-red shadow-none">Cancel</a>
-              <a href="#" class="btn btn-secondary shadow-none float-lg-end"
-                >Continue</a
-              >
+            <a href="\evpass-cdo" class="btn btn-cancel-red shadow-none">Cancel</a>
+            <input class="btn btn-primary shadow-none float-lg-end"  type="submit"  value="Continue" />
             </div>
           </div>
           <div class="col-md-6">

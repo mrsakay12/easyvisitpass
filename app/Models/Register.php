@@ -21,4 +21,10 @@ class Register extends Model
         'register_visitdate'
     
 ];
+
+public function regperson(){
+    return $this->belongsTo('App\Models\User','register_meet_person_name')->withDefault();
+}
+
+
 }

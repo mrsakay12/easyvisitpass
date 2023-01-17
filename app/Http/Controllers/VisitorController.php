@@ -173,13 +173,17 @@ class VisitorController extends Controller
         if($request->ajax())
         {
             
-            $query = Visitor::join('users', 'users.id', '=', 'visitor_meet_person_name')->where('visitor_status', '=', 'In');
+            $query = Visitor::join('users', 'users.id', '=', 'visitor_meet_person_name')
+                            ->join('employees', 'employees.user_id', '=', 'visitor_meet_person_name')
+                            ->join('departments', 'departments.id', '=', 'department_id')
+                            ->where('visitor_status', '=', 'In');
 
 
 
         
 
-            $data = $query ->get(['visitors.visitor_firstname', 'visitors.visitor_lastname', 'visitors.visitor_code', 'visitors.visitor_id', 'visitors.visitor_meet_person_name', 'visitors.visitor_purpose', 'visitors.visitor_enter_time', 'visitors.visitor_out_time', 'visitors.visitor_status', 'users.name', 'visitors.id']);
+            $data = $query ->get(['visitors.visitor_firstname', 'visitors.visitor_lastname', 'visitors.visitor_code', 'visitors.visitor_id', 'visitors.visitor_meet_person_name', 'visitors.visitor_purpose', 'visitors.visitor_enter_time', 'visitors.visitor_out_time', 'visitors.visitor_status', 'users.name', 'visitors.id','departments.department_name',
+            'departments.contact_person']);
 
             return DataTables::of($data)
                 ->addIndexColumn()
@@ -293,7 +297,7 @@ class VisitorController extends Controller
             'visitor_gender'         =>  $data['visitor_gender'],
             'visitor_address'        =>  $data['visitor_address'],
             'visitor_id'             =>  $data['visitor_id'],
-            'visitor_enter_by'       =>  $data['visitor_enter_by'],
+            'visitor_enter_by'       =>  Auth::user()->id,
           
         ]);
 

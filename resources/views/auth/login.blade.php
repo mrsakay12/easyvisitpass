@@ -20,6 +20,9 @@
 		{{ session()->get('success') }}
 	</div>
 	@endif
+	@foreach($company['data'] as $company)
+	<h1 class="mt-4 mb-5 text-center">{{$company->comp_name}}</h1>
+	@endforeach
 					<div class="card">
 					<img src="{{ asset('/Images/logo2.png') }}"  >
 						<h3 class="card-header text-center">Log in</h3>

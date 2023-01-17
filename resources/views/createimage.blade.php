@@ -1,7 +1,7 @@
 @extends('dashboard')
 
 @section('content')
-<link rel="stylesheet" href="{{ asset('css/image.css') }}" />
+<link rel="stylesheet" href="{{ asset('css/image.css') }}" !important />
     <!-- HERO SECTION -->
     <h2 class="mt-3">Visitor Management</h2>
 
@@ -17,7 +17,7 @@
    <div class="main" data-mobile-height="">
         <!-- Default Page -->
 <section id="pm-banner-1" class="custom-css-step">
-    <div class="container camera-container">
+    <div class="container1 camera-container">
         <div class="card border-0 bg-body" style="margin-top:20px;">
             <div class="card-header border-0 bg-body" id="Details" align="center">
                             </div>
@@ -70,7 +70,7 @@
                            
                                     
                                     <h2 class="visit mt-4">VISITED TO :</h2>
-                                    <h2 class="email">Host: {{ $data->visitor_meet_person_name }}</h2>
+                                    <h2 class="email">Host: {{ $data->meetperson->name }}</h2>
                                     <h2 class="email">Purpose: {{ $data->visitor_purpose }}</h2>
 
                                     <input type="hidden" name="hidden_id" value="{{ $data->id }}" />

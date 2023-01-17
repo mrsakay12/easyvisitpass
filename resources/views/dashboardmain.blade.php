@@ -16,71 +16,117 @@
 		{{ session()->get('success') }}
 	</div>
 	@endif
+
+    <div class="date-time">
+    <p class="ridge">
+        <span class="material-symbols-outlined">calendar_month</span>
+        <span id='date'></span>
+    </p>
+    </div>
+    
+    <script>
+        var dt = new Date();
+        document.getElementById('date').innerHTML= new Date().toString();
+    </script>
+
+
     <!-- Dashboard User -->
     @if(Auth::user()->type == 'User')
+    <div class="container">
 	<div class="row">
-        <div class="col-lg-4 col-md-6 col-sm-6 col-12">
+        <div class="employees">
             <a href="">
                 <div class="card card-statistic-1">
-                    <div class="card-icon bg-info">
-                    <span class="material-symbols-outlined"> approval_delegation</span>
+                    <div class="card-icon bg-danger">
+                        <span class="material-symbols-outlined">approval_delegation</span>
+                        <i class="far fa-user"></i>
                     </div>
                     <div class="card-wrap">
                         <div class="card-header">
                             <h4>For Approval</h4>
                         </div>
                         <div class="card-body">
-						{{$visitorin}}
+                            {{$visitorin}}
                         </div>
                     </div>
                 </div>
             </a>
         </div>
-
-
-
-        <div class="col-lg-4 col-md-6 col-sm-6 col-12">
+        <div class="visitors">
             <a href="">
                 <div class="card card-statistic-1">
-                    <div class="card-icon bg-light">
-                    <span class="material-symbols-outlined"> nest_doorbell_visitor</span>
+                    <div class="card-icon bg-primary">
+                        <span class="material-symbols-outlined">nest_doorbell_visitor</span>
+                        <i class="fas fa-users"></i>
                     </div>
                     <div class="card-wrap">
                         <div class="card-header">
                             <h4>Total Checked-out Visitors</h4>
                         </div>
                         <div class="card-body">
-						{{$visitorout}}
+						    {{$visitorout}}
                         </div>
                     </div>
                 </div>
             </a>
         </div>
-		<div class="col-lg-4 col-md-6 col-sm-6 col-12">
+		<div class="registered">
             <a href="">
                 <div class="card card-statistic-1">
-                    <div class="card-icon bg-body">
-                    <span class="material-symbols-outlined">app_registration</span>
+                    <div class="card-icon bg-secondary">
+                        <span class="material-symbols-outlined">app_registration</span>
+                        <i class="fas fa-users"></i>
                     </div>
                     <div class="card-wrap">
                         <div class="card-header">
-                            <h4>Registered Visitors</h4>
+                            <h4>Total Registered Visitors</h4>
                         </div>
                         <div class="card-body">
-                            {{$register}}
+                        {{$register}}
                         </div>
                     </div>
                 </div>
             </a>
         </div>
+        <div class="pre-register">
+            <a href="">
+                <div class="card card-statistic-1">
+                    <div class="card-icon bg-warning">
+                        <span class="material-symbols-outlined">how_to_reg</span>
+                        <i class="fas fa-user-secret"></i>
+                    </div>
+                    <div class="card-wrap">
+                        <div class="card-header">
+                            <h4>Total Pre Registers</h4>
+                        </div>
+                        <div class="card-body">
+                          {{$prereguser}}
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </div>
+    </div>
+
+	
+          <!-- Table USer -->
+          <div class="card">
+		<div class="card-header">
+			<div class="row">
+				<div class="col col-md-6"></div>
+				
+			</div>
+		</div>
+        
         <div class="table-responsive">
 				<table class="table table-bordered" id="visitor_table">
 					<thead>
 						<tr>
-						    <th>Visitor ID</th>
+						    <th>Visitor Pass ID </th>
 							<th>First Name</th>
 							<th>Last Name</th>
-							<th>Visited To</th>
+							<th>Purpose</th>
 							<th>Check-in </th>
 							<th>Check-out</th>
 							<th>Status</th>
@@ -96,7 +142,7 @@
 				</table>
 			</div>
         
-
+            </div>
 </div>
 
 @endif
@@ -105,91 +151,101 @@
 
     @if(Auth::user()->type == 'Receptionist')
 
-    <div class="row">
-        <div class="col-lg-3 col-md-6 col-sm-6 col-12">
+    <div class="container">
+	<div class="row">
+        <div class="employees">
             <a href="">
                 <div class="card card-statistic-1">
-                <div class="card-icon bg-info">
-                    <span class="material-symbols-outlined"> approval_delegation</span>
+                    <div class="card-icon bg-danger">
+                        <span class="material-symbols-outlined">approval_delegation</span>
+                        <i class="far fa-user"></i>
                     </div>
                     <div class="card-wrap">
                         <div class="card-header">
                             <h4>Total Checked-In Visitors</h4>
                         </div>
                         <div class="card-body">
-						{{$checkin}}
+                            {{$checkin}}
                         </div>
                     </div>
                 </div>
             </a>
         </div>
-     
-
-
-        <div class="col-lg-3 col-md-6 col-sm-6 col-12">
+        <div class="visitors">
             <a href="">
                 <div class="card card-statistic-1">
-            
-           <div class="card-icon bg-light">
-                    <span class="material-symbols-outlined"> nest_doorbell_visitor</span>
+                    <div class="card-icon bg-primary">
+                        <span class="material-symbols-outlined">nest_doorbell_visitor</span>
+                        <i class="fas fa-users"></i>
                     </div>
                     <div class="card-wrap">
                         <div class="card-header">
                             <h4>Total Checked-out Visitors</h4>
                         </div>
                         <div class="card-body">
-						{{$checkout}}
+						    {{$checkout}}
                         </div>
                     </div>
                 </div>
             </a>
         </div>
-		<div class="col-lg-3 col-md-6 col-sm-6 col-12">
+		<div class="registered">
             <a href="">
                 <div class="card card-statistic-1">
-           
-                <div class="card-icon bg-light">
-                    <span class="material-symbols-outlined"> nest_doorbell_visitor</span>
+                    <div class="card-icon bg-secondary">
+                        <span class="material-symbols-outlined">app_registration</span>
+                        <i class="fas fa-users"></i>
                     </div>
                     <div class="card-wrap">
                         <div class="card-header">
-                            <h4>Registered Visitors</h4>
+                            <h4>Total Registered Visitors</h4>
                         </div>
                         <div class="card-body">
-                            {{$visitor}}
+                        {{$visitor}}
                         </div>
                     </div>
                 </div>
             </a>
         </div>
-
-        <div class="col-lg-3 col-md-6 col-sm-6 col-12">
+        <div class="pre-register">
             <a href="">
                 <div class="card card-statistic-1">
-    
-                <div class="card-icon bg-light">
-                    <span class="material-symbols-outlined"> pending</span>
+                    <div class="card-icon bg-warning">
+                        <span class="material-symbols-outlined">pending</span>
+                        <i class="fas fa-user-secret"></i>
                     </div>
                     <div class="card-wrap">
                         <div class="card-header">
-                            <h4>Pending Visitors</h4>
+                            <h4>Total Pending Visitors</h4>
                         </div>
                         <div class="card-body">
-                        {{$pending}}
+                          {{$pending}}
                         </div>
                     </div>
                 </div>
             </a>
         </div>
+    </div>
+    </div>
 
+	
+    <div class="card">
+		<div class="card-header">
+			<div class="row">
+				<div class="col col-md-6"></div>
+				
+			</div>
+		</div>
         <div class="table-responsive">
 				<table class="table table-bordered" id="visitor_table2">
 					<thead>
 						<tr>
-						    <th>Visitor ID</th>
+						    <th>Visitor Pass ID </th>
 							<th>First Name</th>
 							<th>Last Name</th>
 							<th>Visited To</th>
+                            <th>Department</th>
+                            <th>Department Location</th>
 							<th>Check-in </th>
 							<th>Check-out</th>
 							<th>Status</th>
@@ -211,64 +267,83 @@
 
  <!-- Admin User -->
  @if(Auth::user()->type == 'Admin')
+
+ <div class="container">
 	<div class="row">
-        <div class="col-lg-4 col-md-6 col-sm-6 col-12">
+        <div class="employees">
             <a href="">
                 <div class="card card-statistic-1">
-                    <div class="card-icon bg-info">
-                    <span class="material-symbols-outlined"> badge</span>
+                    <div class="card-icon bg-danger">
+                        <span class="material-symbols-outlined">badge</span>
+                        <i class="far fa-user"></i>
                     </div>
                     <div class="card-wrap">
                         <div class="card-header">
-                            <h4>Total Employee</h4>
+                            <h4>Total Employees</h4>
                         </div>
                         <div class="card-body">
-						{{$user}}
+                            {{$user}}
                         </div>
                     </div>
                 </div>
             </a>
         </div>
-
-
-
-        <div class="col-lg-4 col-md-6 col-sm-6 col-12">
+        <div class="visitors">
             <a href="">
                 <div class="card card-statistic-1">
-                    <div class="card-icon bg-light">
-                    <span class="material-symbols-outlined"> nest_doorbell_visitor</span>
+                    <div class="card-icon bg-primary">
+                        <span class="material-symbols-outlined">nest_doorbell_visitor</span>
+                        <i class="fas fa-users"></i>
                     </div>
                     <div class="card-wrap">
                         <div class="card-header">
                             <h4>Total Visitors</h4>
                         </div>
                         <div class="card-body">
-						{{$visitor}}
+						    {{$visitor}}
                         </div>
                     </div>
                 </div>
             </a>
         </div>
-		<div class="col-lg-4 col-md-6 col-sm-6 col-12">
+		<div class="registered">
             <a href="">
                 <div class="card card-statistic-1">
-                    <div class="card-icon bg-body">
-                    <span class="material-symbols-outlined">app_registration</span>
+                    <div class="card-icon bg-secondary">
+                        <span class="material-symbols-outlined">groups</span>
+                        <i class="fas fa-users"></i>
                     </div>
                     <div class="card-wrap">
                         <div class="card-header">
-                            <h4>Total Pre-Registered Visitors</h4>
+                            <h4>Total Registered Visitors</h4>
                         </div>
                         <div class="card-body">
-                          {{$preregister}}
+                            12
                         </div>
                     </div>
                 </div>
             </a>
         </div>
-        
-
-</div>
+        <div class="pre-register">
+            <a href="">
+                <div class="card card-statistic-1">
+                    <div class="card-icon bg-warning">
+                        <span class="material-symbols-outlined">how_to_reg</span>
+                        <i class="fas fa-user-secret"></i>
+                    </div>
+                    <div class="card-wrap">
+                        <div class="card-header">
+                            <h4>Total Pre Registers</h4>
+                        </div>
+                        <div class="card-body">
+                            10
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </div>
+    </div>
 
 @endif
 
@@ -298,8 +373,8 @@ $(document).ready(function(){
 		
 			
 			{
-				data: 'name',
-				name: 'name'
+				data: 'visitor_purpose',
+				name: 'visitor_purpose'
 			},
 			
 			{
@@ -369,12 +444,21 @@ var table = $('#visitor_table2').DataTable({
             data:'visitor_lastname' ,
             name: 'visitor_lastname'
         },
-    
-        
         {
             data: 'name',
             name: 'name'
-        },
+        }
+        ,
+        {
+            data: 'department_name',
+            name: 'department_name'
+        }
+        ,
+        {
+            data: 'contact_person',
+            name: 'contact_person'
+        }
+        ,
         
         {
             data:'visitor_enter_time', 

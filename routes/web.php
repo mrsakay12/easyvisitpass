@@ -28,7 +28,7 @@ Route::get('/', function () {
 });
 
 //Front End Route
-Route::get('home', [CustomAuthController::class, 'home'])->name('home');
+Route::get('evpass-cdo', [CustomAuthController::class, 'home'])->name('home');
 Route::get('checkin', [CustomAuthController::class, 'checkin'])->name('checkin');
 Route::get('checkin-id', [CustomAuthController::class, 'checkid'])->name('checkid');
 Route::get('preregister', [CustomAuthController::class, 'preregister'])->name('preregister');
@@ -36,7 +36,12 @@ Route::get('return', [CustomAuthController::class, 'return'])->name('return');
 Route::post('checkin/checkin_validation', [CustomAuthController::class, 'checkin_validation'])->name('checkin_validation');
 
 Route::get('search', [CustomAuthController::class, 'search'])->name('search');
-Route::get('checkin_reg', [CustomAuthController::class, 'checkin_reg'])->name('checkin_reg');
+Route::get('checkin_register', [CustomAuthController::class, 'checkin_register'])->name('checkin_register');
+
+
+Route::get('search2', [CustomAuthController::class, 'search2'])->name('search2');
+Route::get('checkin_return', [CustomAuthController::class, 'checkin_return'])->name('checkin_return');
+Route::post('checkin/return_validation', [CustomAuthController::class, 'return_validation'])->name('return_validation');
 
 
 
@@ -55,7 +60,7 @@ Route::post('custom-login', [CustomAuthController::class, 'custom_login'])->name
 Route::get('dashboard', [CustomAuthController::class, 'dashboard'])->name('dashboard');
 Route::get('dashboard2', [CustomAuthController::class, 'dashboard2'])->name('dashboard2');
 
-Route::redirect('/', '/home')->name('home');
+Route::redirect('/', '/evpass-cdo')->name('home');
 
 
 
@@ -64,7 +69,10 @@ Route::get('logout', [CustomAuthController::class, 'logout'])->name('logout');
 Route::get('profile', [ProfileController::class, 'index'])->name('profile');
 
 
+
 Route::post('profile/edit_validation', [ProfileController::class, 'edit_validation'])->name('profile.edit_validation');
+Route::get('company', [ProfileController::class, 'company'])->name('company');
+Route::post('company/edit_validation', [ProfileController::class, 'company_validation'])->name('profile.company_validation');
 
 
 

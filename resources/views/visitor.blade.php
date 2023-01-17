@@ -34,7 +34,7 @@
 				<table class="table table-bordered" id="visitor_table">
 					<thead>
 						<tr>
-						    <th>Visitor ID</th>
+						    <th>Visitor Pass ID </th>
 							<th>First Name</th>
 							<th>Last Name</th>
 							<th>Visited To</th>

@@ -9,6 +9,9 @@ class Visitor extends Model
 {
     use HasFactory;
 
+    protected $table = 'visitors';
+
+
     protected $fillable = [
                 'visitor_code', 
                 'visitor_firstname', 
@@ -33,6 +36,11 @@ class Visitor extends Model
         return $this->belongsTo('App\Models\User','user_id')->withDefault();
     }
 
+    public function meetperson(){
+        return $this->belongsTo('App\Models\User','visitor_meet_person_name')->withDefault();
+    }
+
+    
     public function user()
     {
   

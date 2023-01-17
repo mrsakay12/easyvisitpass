@@ -61,7 +61,7 @@
                   <input type="text"
                     class="form-select"
                     id='visitor_meet_person_name' name='visitor_meet_person_name'
-                     value="{{$register->register_meet_person_name}}"
+                     value="{{$register->regperson->name}}"
                   />
                 
 
@@ -178,7 +178,7 @@
           </div>
           @endforeach
           <div class="col-md-6">
-            <img src="img/hero-section.png" class="w-100" alt="" />
+            <img src="{{ asset('/Images/chekin.png') }}"  class="w-100" alt="" />
           </div>
         </div>
       </div>
