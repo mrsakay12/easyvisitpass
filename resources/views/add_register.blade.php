@@ -74,7 +74,7 @@
 						<div class="col-md-6">
 							<label><b>Gender</b></label>
 								<select class="form-control" name="register_gender">
-									<option>---> choose</option>
+								
 									<option value="Male">Male</option>
 									<option value="Female">Female</option>
 								</select>

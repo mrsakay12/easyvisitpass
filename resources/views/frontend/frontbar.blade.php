@@ -27,7 +27,7 @@
     <!-- Navbar Section -->
     <nav class="navbar navbar-expand-lg bg-white">
       <div class="container">
-        <a class="navbar-brand" href="\evpass-cdo">
+        <a class="navbar-brand" href="\home">
           <img
             src="{{ asset('/Images/logo3.png') }}"
             alt="logo"

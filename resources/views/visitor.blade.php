@@ -38,6 +38,9 @@
 							<th>First Name</th>
 							<th>Last Name</th>
 							<th>Visited To</th>
+							@if(Auth::user()->type == 'User')
+							<th>Visited Date and Time</th>
+							@endif
 							<th>Check-in </th>
 							<th>Check-out</th>
 							<th>Status</th>
@@ -84,6 +87,13 @@ $(document).ready(function(){
 				data: 'name',
 				name: 'name'
 			},
+			@if(Auth::user()->type == 'User')
+			{
+				data: 'visit_time',
+				name: 'visit_time'
+			}
+			,
+			@endif
 			
 			{
 				data:'visitor_enter_time', 

@@ -25,7 +25,7 @@
               <input class="form-control input mb-4" placeholder="Search email address.." name="query" type="text" />
             </div>
             <div class="cta">
-            <a href="\evpass-cdo" class="btn btn-cancel-red shadow-none">Cancel</a>
+            <a href="\home" class="btn btn-cancel-red shadow-none">Cancel</a>
             <input class="btn btn-primary shadow-none float-lg-end"  type="submit"  value="Continue" />
             </div>
           </div>

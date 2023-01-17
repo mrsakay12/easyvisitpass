@@ -28,7 +28,7 @@ Route::get('/', function () {
 });
 
 //Front End Route
-Route::get('evpass-cdo', [CustomAuthController::class, 'home'])->name('home');
+Route::get('home', [CustomAuthController::class, 'home'])->name('home');
 Route::get('checkin', [CustomAuthController::class, 'checkin'])->name('checkin');
 Route::get('checkin-id', [CustomAuthController::class, 'checkid'])->name('checkid');
 Route::get('preregister', [CustomAuthController::class, 'preregister'])->name('preregister');
@@ -58,9 +58,9 @@ Route::get('login', [CustomAuthController::class, 'index'])->name('login');
 Route::post('custom-login', [CustomAuthController::class, 'custom_login'])->name('login.custom');
 
 Route::get('dashboard', [CustomAuthController::class, 'dashboard'])->name('dashboard');
-Route::get('dashboard2', [CustomAuthController::class, 'dashboard2'])->name('dashboard2');
+Route::get('dash', [CustomAuthController::class, 'dash'])->name('dash');
 
-Route::redirect('/', '/evpass-cdo')->name('home');
+Route::redirect('/', '/home')->name('home');
 
 
 
@@ -79,6 +79,7 @@ Route::post('company/edit_validation', [ProfileController::class, 'company_valid
 
 
 Route::post('employee/edit_validation', [EmployeeController::class, 'edit_validation'])->name('employee.edit_validation');
+Route::post('employee/edit_empvalidation', [EmployeeController::class, 'edit_empvalidation'])->name('employee.edit_empvalidation');
 Route::get('employee/add', [EmployeeController::class, 'add'])->name('add');
 Route::post('employee/add_validation', [EmployeeController::class, 'add_validation'])->name('employee.add_validation');
 
@@ -139,7 +140,11 @@ Route::get('visitor/delete/{id}', [VisitorController::class, 'delete'])->name('d
 
 
 Route::get('visitorimage', [VisitorController::class, 'visitorimage'])->name('visitorimage');
+Route::get('employeeview1', [VisitorController::class, 'employeeview1'])->name('employeeview1');
 Route::get('visitor/edit/{id}', [VisitorController::class, 'edit'])->name('edit');
+Route::get('employeeview/edit/{id}', [VisitorController::class, 'employeeview'])->name('employeeview');
+Route::get('checkoutview/{id}', [VisitorController::class, 'checkoutview'])->name('checkoutview');
+
 
 
 

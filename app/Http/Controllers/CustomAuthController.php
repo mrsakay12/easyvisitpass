@@ -22,6 +22,14 @@ class CustomAuthController extends Controller
         ->get();
         return view('auth.login')->with("company", $company);
     }
+    public function dash()
+
+    {
+        $company['data'] = User::where('id', '=', "1")
+        ->select('comp_name')
+        ->get();
+        return view('dashboard')->with("company", $company);
+    }
 
     public function custom_login(Request $request)
     {
@@ -31,12 +39,17 @@ class CustomAuthController extends Controller
         ]);
 
        
+        
+            $company['data'] = User::where('id', '=', "1")
+            ->select('comp_name')
+            ->get();
+
 
         $credential = $request->only('email', 'password');
 
         if(Auth::attempt($credential))
         {
-            return redirect()->intended('dashboard')->withSuccess('You have successfully been logged in');
+            return redirect()->intended('dashboard')->withSuccess('You have successfully been logged in')->with("company", $company);;
         }
 
         return redirect('login')->with('error', '"The email address or password is incorrect. Please retry..." ');
@@ -73,6 +86,7 @@ class CustomAuthController extends Controller
         if(Auth::check())
         {
            
+      
             $visitorin = Visitor::where('visitor_status', '=', 'Lobby')->where('visitor_meet_person_name', '=', Auth::user()->id)->count();
             $visitorout = Visitor::where('visitor_status', '=', 'Out')->where('visitor_meet_person_name', '=', Auth::user()->id)->count();
             $register = Visitor::where('visitor_meet_person_name', '=', Auth::user()->id)->count();
@@ -86,13 +100,17 @@ class CustomAuthController extends Controller
             $user = User::where('type', '=', 'User')->where('status', '=', 'Active')->count();
             $visitor = Visitor::count();
             $preregister = Register::count();
+            $out = Visitor::where('visitor_status', '=', 'Out')->count();
          
-          
+            $company['data'] = User::where('id', '=', "1")
+            ->select('comp_name')
+            ->get();
+
             
             return view('dashboardmain')->with("user", $user)->with("visitor", $visitor)->with("visitorin", $visitorin)
             ->with("visitorout", $visitorout)->with("register", $register)->with("checkin", $checkin)
             ->with("checkout", $checkout)->with("pending", $pending)->with("preregister", $preregister)
-            ->with("prereguser", $prereguser);
+            ->with("prereguser", $prereguser)->with("company", $company)->with("out", $out);
         }
 
         return redirect('login');

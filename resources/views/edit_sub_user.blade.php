@@ -66,6 +66,96 @@
 			</div>
 		</div>
 	</div>
+
+
+<div class="col-md-8">
+    <div class="card">
+        <div class="card-header">Edit Additional Details</div>
+        <div class="card-body">
+		<form method="post" action="{{ route('employee.edit_empvalidation') }}">
+                @csrf
+                <div class="form-group mb-3 row">
+                    <div class="col-md-6">
+                        <label><b>First Name</b></label>
+                        <input type="text" name="first_name" class="form-control" placeholder="First Name" value="{{ $data2->first_name }}" />
+                    </div>
+                    <div class="col-md-6">
+                        <label><b>Last Name</b></label>
+                        <input type="text" name="last_name" class="form-control" placeholder="Last Name" value="{{ $data2->last_name }}" />
+                    </div>
+                </div>
+
+                <div class="form-group mb-3 row">
+                    <div class="col-md-6">
+                        <label><b>Nickname</b></label>
+                        <input type="text" name="nickname" class="form-control" placeholder="nickname" value="{{ $data2->nickname }}" />
+                    </div>
+                    <div class="col-md-6">
+					<label><b>Gender</b></label>
+		        		
+						<select class="form-control"  name="gender" aria-label="Default select example" optionvalue="{{ $data2->gender}}" >
+						
+								<option value="Male" {{$data2->gender == "Male" ? "selected" : ""}}>Male</option>
+								<option value="Female" {{$data2->gender == "Female" ? "selected" : ""}}>Female</option>
+						</select>
+                    </div>
+                </div>
+
+                <div class="form-group mb-3 row">
+                    <div class="col-md-6">
+                        <label><b>About Me</b></label>
+                        <input type="text" name="about" class="form-control" placeholder="About Me" value="{{ $data2->about }}" />
+                    </div>
+                    <div class="col-md-6">
+                        <label><b>Phone</b></label>
+                        <input type="text" name="phone" class="form-control" placeholder="phone" value="{{ $data2->phone }}" />
+                    </div>
+                </div>
+
+				<div class="form-group mb-3 row">
+				<div class="form-group mb-3">
+                        <label><b>Address</b></label>
+                  
+						<input type="text"
+                      class="form-control"
+                    
+                      rows="2"
+                      name="address"
+					  value="{{$data2->address}}" />
+					</div>
+                </div>
+
+                <div class="form-group mb-3 row">
+				<div class="form-group mb-3">
+		        		<label><b>Department</b></label>
+					<select id='department_id' name='department_id' class="form-control"  >
+								<option value='0'>-- Select department --</option>
+								<!-- Read Departments -->
+								@foreach($departments['data'] as $department)
+									<option  value='{{ $department->id }}'  {{$data2->department_id ==  $department->id ? "selected" : ""}} >{{ $department->department_name }}</option>
+								@endforeach
+							</select>
+					</div>
+					<div class="form-group mb-3">
+		        		<label><b>Designation</b></label>
+					<select id='designation_id' name='designation_id' class="form-control" >
+                    <option value='0'>-- Select designation --</option>
+								<!-- Read Departments -->
+								@foreach($designations['data'] as $designations)
+									<option  value='{{ $designations->id }}'  {{$data2->designation_id ==  $designations->id ? "selected" : ""}} >{{ $designations->designation_name }}</option>
+								@endforeach
+							</div>
+                       <br>
+
+                <div class="form-group mb-3">
+				<input type="hidden" name="hidden_id" value="{{ $data2->id }}" />
+                    <input type="submit" class="btn btn-primary" value="Submit" />
+                </div
+				</div>
+
+				</div>
 </div>
+
+				
 
 @endsection

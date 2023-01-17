@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Department;
+use App\Models\Designation;
 use Illuminate\Http\Request;
 
 use App\Models\User;
@@ -68,7 +70,7 @@ class SubUserController extends Controller
             'password'  =>  Hash::make($data['password']),
             'type'      =>  $data['type'],
             'status'      =>  $data['status'],
-            'profile'      =>  $data['profile'],
+          
         ]);
 
       
@@ -78,8 +80,16 @@ class SubUserController extends Controller
     public function edit($id)
     {
         $data = User::findOrFail($id);
+        $data2 = Employee::findOrFail($id);
+        $departments['data'] = Department::orderby("department_name","asc")
+        ->select('id','department_name')
+        ->get();
+        $designations['data'] = Designation::orderby("designation_name","asc")
+        ->select('id','designation_name')
+        ->get();
 
-        return view('edit_sub_user', compact('data'));
+        return view('edit_sub_user', compact('data','data2'))->with("departments",$departments)->with("designations",$designations);
+      
     }
 
     function edit_validation(Request $request)
@@ -116,6 +126,7 @@ class SubUserController extends Controller
         return redirect('sub_user')->with('success', 'User Data Updated');
 
     }
+    
 
     function delete($id)
     {

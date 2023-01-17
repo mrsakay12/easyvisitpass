@@ -58,11 +58,18 @@
                   <label for="inputEmail4" class="form-label"
                     >Select Employee<span class="text-danger">*</span></label>
 
-                  <input type="text"
+                
+
+                  <select
                     class="form-select"
                     id='visitor_meet_person_name' name='visitor_meet_person_name'
-                     value="{{$register->regperson->name}}"
-                  />
+                    aria-label="Default select example"
+                  >
+                   
+                    @foreach($user['data'] as $user)
+                 <option value='{{ $register->register_meet_person_name}}'>{{ $register->regperson->name}}</option>
+                      @endforeach
+                  </select>
                 
 
                   @if($errors->has('visitor_meet_person_name'))

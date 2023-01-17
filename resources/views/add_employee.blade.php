@@ -18,18 +18,14 @@
 				
 					@csrf
 					<div class="form-group mb-3">
-		        		<label><b>User Name</b></label>
+		        		<label><b>Full Name</b></label>
 		        		<input type="text" name="name" class="form-control" placeholder="name" value="{{ $user->name }}" disabled/>
-		        		@if($errors->has('name'))
-		        		<span class="text-danger">{{ $errors->first('name') }}</span>
-		        		@endif
+		  
 		        	</div>
 		        	<div class="form-group mb-3">
-		        		<label><b>User Email</b></label>
+		        		<label><b> Email Address</b></label>
 		        		<input type="text" name="email" class="form-control" placeholder="Email" value="{{ $user->email }}" disabled/>
-		        		@if($errors->has('email'))
-		        		<span class="text-danger">{{ $errors->has('email') }}</span>
-		        		@endif
+		        	
 		        	</div>
 		        	
 		        	<div class="form-group mb-3">
@@ -46,12 +42,10 @@
 		        	<div class="form-group mb-3">
 		        		<label><b>Password</b></label>
 		        		<input type="password" name="password" class="form-control" placeholder="Password">
-		        		@if($errors->has('password'))
-		        			<span class="text-danger">{{ $errors->first('password') }}</span>
-		        		@endif
+		        	
 		        	</div>
 		        	<div class="form-group mb-3">
-		        		<input type="submit" class="btn btn-primary" value="Add" />
+		        		<input type="submit" class="btn btn-primary" value="Add" disabled/>
 		        	</div>
 		        	</div>
 				</form>
@@ -110,14 +104,23 @@
 					</div>
 					<div class="form-group mb-3">
 		        		<label><b>Designation</b></label>
-					<select id='designation_id' name='designation_id' class="form-control" >
-								<option value='0'>-- Select designation --</option>
-							</select>
+						<select id='designation_id' name='designation_id' class="form-control" >
+                    <option value='0'>-- Select designation --</option>
+								<!-- Read Departments -->
+								@foreach($designations['data'] as $designations)
+									<option  value='{{ $designations->id }}' >{{ $designations->designation_name }}</option>
+								@endforeach
+
 							</div>
                 </div>
 
-				
 
+				<div class="form-group mb-3">
+		        	
+		        	</div>
+		        	<div class="form-group mb-3">
+		        		
+		        	</div>
 
                 <div class="form-group mb-3">
 				<input type="hidden" name="user_id" value="{{ $user->id }}" />
@@ -125,52 +128,8 @@
                 </div
 				</div>
 				
-   <!-- Script -->
-   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-   <script type='text/javascript'>
-   $(document).ready(function(){
 
-      // Department Change
-      $('#department_id').change(function(){
-
-         // Department id
-         var id = $(this).val();
-
-         // Empty the dropdown
-         $('#designation_id').find('option').not(':first').remove();
-
-         // AJAX request 
-         $.ajax({
-           url: 'getDept/'+id,
-           type: 'get',
-           dataType: 'json',
-           success: function(response){
-
-             var len = 0;
-             if(response['data'] != null){
-                len = response['data'].length;
-             }
-
-             if(len > 0){
-                // Read data and create <option >
-                for(var i=0; i<len; i++){
-
-                   var id = response['data'][i].id;
-                   var name = response['data'][i].name;
-
-                   var option = "<option value='"+id+"'>"+name+"</option>";
-
-                   $("#designation_id").append(option); 
-                }
-             }
-
-           }
-         });
-      });
-   });
-   </script>
-</body>
-</html>
+				
 
  
 @endsection

@@ -315,10 +315,10 @@
                     </div>
                     <div class="card-wrap">
                         <div class="card-header">
-                            <h4>Total Registered Visitors</h4>
+                            <h4>Total Checked Out Visitors</h4>
                         </div>
                         <div class="card-body">
-                            12
+                        {{$out}}
                         </div>
                     </div>
                 </div>
@@ -336,7 +336,7 @@
                             <h4>Total Pre Registers</h4>
                         </div>
                         <div class="card-body">
-                            10
+                        {{$preregister}}
                         </div>
                     </div>
                 </div>

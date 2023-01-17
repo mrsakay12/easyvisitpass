@@ -23,7 +23,10 @@ class ProfileController extends Controller
         $departments['data'] = Department::orderby("department_name","asc")
         ->select('id','department_name')
         ->get();
-        return view('profile', compact('data','data2'))->with("departments",$departments);
+        $designations['data'] = Designation::orderby("designation_name","asc")
+        ->select('id','designation_name')
+        ->get();
+        return view('profile', compact('data','data2'))->with("departments",$departments)->with("designations",$designations);
       
     }
 

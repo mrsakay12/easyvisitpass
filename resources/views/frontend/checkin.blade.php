@@ -172,7 +172,7 @@
                 </div>
               </div>
               <div class="cta">
-                <a href="\evpass-cdo" class="btn btn-cancel-red shadow-none">Cancel</a>
+                <a href="\home" class="btn btn-cancel-red shadow-none">Cancel</a>
                <input class="btn btn-primary shadow-none float-lg-end"  type="submit"  value="Continue" />
 		        	
 		        

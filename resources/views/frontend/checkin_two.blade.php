@@ -52,7 +52,7 @@
                                                             </a >
                                                            
                                                                                                                         <a href="\home" class="btn btn-danger text-white ">
-                                                                <i  href="\evpass-cdo" class="fa fa-home" aria-hidden="true"></i> Home
+                                                                <i  href="\home" class="fa fa-home" aria-hidden="true"></i> Home
                                                             </a>
                                                         </div>
                                                     </div>

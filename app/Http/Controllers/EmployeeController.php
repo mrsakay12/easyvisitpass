@@ -70,13 +70,44 @@ class EmployeeController extends Controller
         return redirect('profile')->with('success', 'Profile Data Updated');
     
     }
+    function edit_empvalidation(Request $request)
+    {
+        $request->validate([
+            'first_name'     =>  'required',
+            'last_name'      =>  'required'
+        ]);
+
+        $data = $request->all();
+
+            $form_data = array(
+                'first_name'    =>  $data['first_name'],
+                'last_name'     =>  $data['last_name'],
+                'phone'    =>  $data['phone'],
+                'nickname'     =>  $data['nickname'],
+                'gender'    =>  $data['gender'],
+                'address'    =>  $data['address'],
+                'department_id'     =>  $data['department_id'],
+                'designation_id'     =>  $data['designation_id'],
+                'about'     =>  $data['about'],
+                'user_id'     =>  Auth::user()->id,
+                'modified_by'     =>  Auth::user()->id,
+                
+            );
+            Employee::whereId($data['hidden_id'])->update($form_data);
+    
+        return redirect('sub_user')->with('success', 'Profile Data Updated');
+    
+    }
     function add()
     {
         $user = Session::get('data');
         $departments['data'] = Department::orderby("department_name","asc")
         ->select('id','department_name')
         ->get();
-        return view('add_employee')->with("departments",$departments)->with("user", $user);
+          $designations['data'] = Designation::orderby("designation_name","asc")
+        ->select('id','designation_name')
+        ->get();
+        return view('add_employee')->with("departments",$departments)->with("user", $user)->with("designations",$designations);
  
 
 
