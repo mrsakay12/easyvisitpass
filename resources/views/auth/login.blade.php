@@ -21,7 +21,7 @@
 	</div>
 	@endif
 	@foreach($company['data'] as $company)
-	<h1 class="mt-4 mb-5 text-center">{{$company->comp_name}}</h1>
+	<h1 class="headL t-4 mb-5 text-center">{{$company->comp_name}}</h1>
 	@endforeach
 					<div class="card">
 					<img src="{{ asset('/Images/logo2.png') }}"  >

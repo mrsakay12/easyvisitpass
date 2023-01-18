@@ -155,13 +155,13 @@ class VisitorController extends Controller
 
         if ($request->ajax()) {
 
-            $query = Visitor::join('users', 'users.id', '=', 'visitor_meet_person_name')
-                ->join('employees', 'employees.user_id', '=', 'visitor_meet_person_name')
-                ->join('departments', 'departments.id', '=', 'department_id')
-                ->where('visitor_status', '=', 'In');
+            $query = Visitor::join('users', 'users.id', '=', 'visitor_meet_person_name');
+             
 
 
-
+                if (Auth::user()->type == 'Receptionist') {
+                    $query->where('visitor_status', '=', 'In');
+                }
 
 
             $data = $query->get([
@@ -176,8 +176,7 @@ class VisitorController extends Controller
                 'visitors.visitor_status',
                 'users.name',
                 'visitors.id',
-                'departments.department_name',
-                'departments.contact_person'
+             
             ]);
 
             return DataTables::of($data)

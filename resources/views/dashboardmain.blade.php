@@ -244,8 +244,6 @@
 							<th>First Name</th>
 							<th>Last Name</th>
 							<th>Visited To</th>
-                            <th>Department</th>
-                            <th>Department Location</th>
 							<th>Check-in </th>
 							<th>Check-out</th>
 							<th>Status</th>
@@ -449,16 +447,7 @@ var table = $('#visitor_table2').DataTable({
             name: 'name'
         }
         ,
-        {
-            data: 'department_name',
-            name: 'department_name'
-        }
-        ,
-        {
-            data: 'contact_person',
-            name: 'contact_person'
-        }
-        ,
+       
         
         {
             data:'visitor_enter_time', 

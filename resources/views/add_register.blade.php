@@ -84,14 +84,20 @@
 						</div>
 						@if(Auth::user()->type != 'User')
 						<div class="col-md-6">
-							<label><b>Select Employee</b></label>
+					
+
+
+					<label><b>Select Employee</b></label>
 							<select id='register_meet_person_name' name='register_meet_person_name' class="form-control" >
                  <option >-- Select employee --</option>
                       @foreach($user['data'] as $user)
                  <option value='{{ $user->id }}'>{{ $user->name }}</option>
+                      @endforeach
 					</select>
-					@endforeach
+
+
 					@endif
+					
 					@if(Auth::user()->type == 'User')
 						<div class="col-md-6">
 							<input type="hidden" class="form-control"  id="register_meet_person_name" name="register_meet_person_name" value="{{Auth::user()->id}}">

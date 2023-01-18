@@ -149,7 +149,7 @@
 
                 <div class="form-group mb-3">
 				<input type="hidden" name="hidden_id" value="{{ $data2->id }}" />
-                    <input type="submit" class="btn btn-primary" value="Submit" />
+                    <input type="submit" class="btn btn-primary" value="Save" />
                 </div
 				</div>
 

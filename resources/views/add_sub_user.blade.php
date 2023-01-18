@@ -19,7 +19,7 @@
 				<form method="POST" action="{{ route('sub_user.add_validation') }}">
 					@csrf
 					<div class="form-group mb-3">
-		        		<label><b>Employee User ID</b></label>
+		        		<label><b>Employee Full Name</b></label>
 		        		<input type="text" name="name" class="form-control" placeholder="Name" />
 		        		@if($errors->has('name'))
 		        		<span class="text-danger">{{ $errors->first('name') }}</span>
