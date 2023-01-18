@@ -79,7 +79,7 @@
 								<span class="text-danger">{{ $errors->first('register_gender') }}</span>
 								@endif
 						</div>
-						@if(Auth::user()->type != 'User')
+				@if(Auth::user()->type != 'User')
 						<div class="col-md-6">
 							<label><b>Select Employee</b></label>
 							<select id='register_meet_person_name' name='register_meet_person_name' class="form-control" value="{{ $data->register_meet_person_name }}">
@@ -88,12 +88,22 @@
                  <option value='{{ $user->id }}'>{{ $user->name }}</option>
                       @endforeach
 					</select>
-							@if($errors->has('register_meet_person_name'))
+					@endif
+					@if($errors->has('register_meet_person_name'))
 							<span class="text-danger">{{ $errors->first('register_meet_person_name') }}</span>
 							@endif
+
+					@if(Auth::user()->type == 'User')
+						<div class="col-md-6">
+						<input type="hidden" name="register_meet_person_name" value= "{{ Auth::user()->id }} " />
+		        	
+					</select>
+					@endif
+
+							
 						</div>
 					</div>
-					@endif
+					
 					<!-- Gender and Select Employee End -->
 
 

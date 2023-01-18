@@ -77,8 +77,11 @@ class VisitorController extends Controller
                         ';
                     } elseif ($row->visitor_status == 'In') {
                         return '<a href="/visitor/out/' . $row->id . '" class="btn btn-info btn-sm">Check-Out</a>';
-                    } else {
+                    } elseif ($row->visitor_status == 'Out') {
                         return '<a href="/checkoutview/' . $row->id . '" class="btn btn-success btn-sm">View Checkout</a>';
+                    }
+                    else {
+                        return '';
                     }
                 })
                 ->rawColumns(['action'])
