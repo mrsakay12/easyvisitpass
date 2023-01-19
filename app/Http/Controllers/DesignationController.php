@@ -28,7 +28,7 @@ class DesignationController extends Controller
     public function index()
     {
        
-        return view('designation');
+        return view('designation/designation');
     }
 
     function fetch_all(Request $request)
@@ -55,7 +55,7 @@ class DesignationController extends Controller
         $departments['data'] = Department::orderby("department_name","asc")
         ->select('id','department_name')
         ->get();
-        return view('add_designation')->with("departments",$departments);
+        return view('designation/add_designation')->with("departments",$departments);
     }
 
     function add_validation(Request $request)
@@ -86,7 +86,7 @@ class DesignationController extends Controller
         ->get();
         
         
-        return view('edit_designation', compact('data'))->with("departments",$departments);
+        return view('designation/edit_designation', compact('data'))->with("departments",$departments);
     }
 
     function edit_validation(Request $request)

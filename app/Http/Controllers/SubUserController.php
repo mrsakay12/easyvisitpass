@@ -24,7 +24,7 @@ class SubUserController extends Controller
 
     public function index()
     {
-        return view('sub_user');
+        return view('employee/sub_user');
     }
 
     function fetch_all(Request $request)
@@ -50,7 +50,7 @@ class SubUserController extends Controller
 
     function add()
     {
-        return view('add_sub_user');
+        return view('employee/add_sub_user');
     }
 
     function add_validation(Request $request)
@@ -88,7 +88,7 @@ class SubUserController extends Controller
         ->select('id','designation_name')
         ->get();
 
-        return view('edit_sub_user', compact('data','data2'))->with("departments",$departments)->with("designations",$designations);
+        return view('employee/edit_sub_user', compact('data','data2'))->with("departments",$departments)->with("designations",$designations);
       
     }
 

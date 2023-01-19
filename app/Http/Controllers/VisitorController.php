@@ -20,7 +20,7 @@ class VisitorController extends Controller
 
     function index()
     {
-        return view('visitor');
+        return view('visitor/visitor');
     }
 
     function fetch_all(Request $request)
@@ -236,7 +236,7 @@ class VisitorController extends Controller
         $user['data'] = User::orderby("name", "asc")->where('type', '=', 'User')->where('status', '=', 'Active')
             ->select('id', 'name')
             ->get();
-        return view('add_visitor')->with("user", $user);
+        return view('visitor/add_visitor')->with("user", $user);
     }
 
 
@@ -387,12 +387,12 @@ class VisitorController extends Controller
     function visitorimage()
     {
 
-        return view('createimage');
+        return view('visitor/createimage');
     }
     function employeeview1()
     {
 
-        return view('employeeview');
+        return view('visitor/employeeview');
     }
 
 
@@ -400,20 +400,20 @@ class VisitorController extends Controller
     {
         $data = Visitor::findOrFail($id);
 
-        return view('createimage', compact('data'));
+        return view('visitor/createimage', compact('data'));
     }
     public function employeeview($id)
     {
         $data = Visitor::findOrFail($id);
 
-        return view('employeeview', compact('data'));
+        return view('visitor/employeeview', compact('data'));
     }
 
     public function checkoutview($id)
     {
         $data = Visitor::findOrFail($id);
 
-        return view('checkoutview', compact('data'));
+        return view('visitor/checkoutview', compact('data'));
     }
 }
 

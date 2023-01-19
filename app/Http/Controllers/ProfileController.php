@@ -26,7 +26,7 @@ class ProfileController extends Controller
         $designations['data'] = Designation::orderby("designation_name","asc")
         ->select('id','designation_name')
         ->get();
-        return view('profile', compact('data','data2'))->with("departments",$departments)->with("designations",$designations);
+        return view('employee/profile', compact('data','data2'))->with("departments",$departments)->with("designations",$designations);
       
     }
 
@@ -35,7 +35,7 @@ class ProfileController extends Controller
     {
         $data = User::findOrFail(Auth::user()->id);
        
-        return view('company', compact('data'));
+        return view('employee/company', compact('data'));
       
     }
 

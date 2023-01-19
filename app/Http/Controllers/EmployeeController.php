@@ -36,7 +36,7 @@ class EmployeeController extends Controller
         $departments['data'] = Department::orderby("department_name","asc")
         ->select('id','department_name')
         ->get();
-        return view('profile', compact('data','data2'))->with("departments",$departments);
+        return view('employee/profile', compact('data','data2'))->with("departments",$departments);
     }
 
 
@@ -107,7 +107,7 @@ class EmployeeController extends Controller
           $designations['data'] = Designation::orderby("designation_name","asc")
         ->select('id','designation_name')
         ->get();
-        return view('add_employee')->with("departments",$departments)->with("user", $user)->with("designations",$designations);
+        return view('employee/add_employee')->with("departments",$departments)->with("user", $user)->with("designations",$designations);
  
 
 

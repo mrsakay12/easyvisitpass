@@ -17,7 +17,7 @@ class RegisterController extends Controller
 
     function index()
     {
-        return view('register');
+        return view('register/register');
     }
     function fetch_all(Request $request)
     {
@@ -46,7 +46,7 @@ class RegisterController extends Controller
         $user['data'] = User::orderby("name","asc")->where('type', '=', 'User')->where('status', '=', 'Active')
         ->select('id','name')
         ->get();
-        return view('add_register')->with("user",$user);
+        return view('register/add_register')->with("user",$user);
       
     }
 
@@ -99,7 +99,7 @@ class RegisterController extends Controller
         ->select('id','name')
         ->get();
         $data = Register::findOrFail($id);
-        return view('edit_register', compact('data'))->with("user",$user);
+        return view('register/edit_register', compact('data'))->with("user",$user);
 
     }
 

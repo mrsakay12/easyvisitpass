@@ -20,7 +20,7 @@ class DepartmentController extends Controller
     public function index()
     {
        
-        return view('department');
+        return view('department/department');
     }
 
     function fetch_all(Request $request)
@@ -40,7 +40,7 @@ class DepartmentController extends Controller
 
     function add()
     {
-        return view('add_department');
+        return view('department/add_department');
     }
 
     function add_validation(Request $request)
@@ -65,7 +65,7 @@ class DepartmentController extends Controller
     {
         $data = Department::findOrFail($id);
 
-        return view('edit_department', compact('data'));
+        return view('department/edit_department', compact('data'));
     }
 
     function edit_validation(Request $request)
